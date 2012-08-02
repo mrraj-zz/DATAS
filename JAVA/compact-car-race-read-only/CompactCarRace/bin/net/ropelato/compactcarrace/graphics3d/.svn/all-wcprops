@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/22/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d
+END
+CollisionExitDetector.class
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/9/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/CollisionExitDetector.class
+END
+Model.class
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/22/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/Model.class
+END
+CopyOfMyText2D.class
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/9/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/CopyOfMyText2D.class
+END
+MyText2D.class
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/22/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/MyText2D.class
+END
+MyText3D.class
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/22/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/MyText3D.class
+END
+Terrain.class
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/9/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/Terrain.class
+END
+Triangle.class
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/9/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/Triangle.class
+END
+MyPointLight.class
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/9/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/MyPointLight.class
+END
+CollisionEntryDetector.class
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/9/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/CollisionEntryDetector.class
+END
+Camera.class
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/22/trunk/CompactCarRace/bin/net/ropelato/compactcarrace/graphics3d/Camera.class
+END

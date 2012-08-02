@@ -1,0 +1,37 @@
+--- Log opened Mon Dec 12 00:00:29 2011
+01:41 --- Siddartha|zZz is now known as siddartha
+03:46 --- danryan is now known as zz_danryan
+03:47 --- zz_danryan is now known as danryan
+05:04 --- danryan is now known as zz_danryan
+05:12 --- zz_danryan is now known as danryan
+08:55 --- danryan is now known as zz_danryan
+08:59 --- zz_danryan is now known as danryan
+09:01 --- danryan is now known as zz_danryan
+09:01 --- zz_danryan is now known as danryan
+09:28 --- danryan is now known as zz_danryan
+09:29 --- zz_danryan is now known as danryan
+11:22 --- siddartha is now known as Siddartha|zZz
+11:23 --- danryan is now known as zz_danryan
+11:24 --- zz_danryan is now known as danryan
+12:54 --- danryan is now known as zz_danryan
+13:31 <mattray> oh zenoss, so unpredictable
+14:56 <Damm> no zenoss is predictable
+14:56 <Damm> constantly a pain in the ass
+14:56 <Damm> s/constantly/consistently
+14:58 <mattray> I just mean from release to release, things seem to change
+14:59 <Damm> appearances are everything, and nothing
+15:04 <portertech> Damm: so deep
+15:05 <Damm> portertech, and yet so true
+15:05 <Damm> portertech, if it appears to change, it must have.  but has it really?
+17:10 --- zz_danryan is now known as danryan
+18:19 --- danryan is now known as zz_danryan
+18:42 --- zz_danryan is now known as danryan
+18:47 --- danryan is now known as zz_danryan
+18:49 --- zz_danryan is now known as danryan
+19:21 --- danryan is now known as zz_danryan
+19:25 --- zz_danryan is now known as danryan
+19:52 --- danryan is now known as zz_danryan
+20:32 --- zz_danryan is now known as danryan
+20:56 --- danryan is now known as zz_danryan
+21:06 --- zz_danryan is now known as danryan
+--- Log closed Tue Dec 13 00:00:30 2011

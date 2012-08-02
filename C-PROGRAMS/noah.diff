@@ -1,0 +1,4774 @@
+commit 97ceb18cef37505d2b1da06032e35490a8a788ce
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Mar 28 16:58:24 2012 -0700
+
+    Combine these two JS nodes.
+
+diff --git a/app/views/shared/_default_analytics_footer.html.erb b/app/views/shared/_default_analytics_footer.html.erb
+index 2a051d8..2b14153 100644
+--- a/app/views/shared/_default_analytics_footer.html.erb
++++ b/app/views/shared/_default_analytics_footer.html.erb
+@@ -1,11 +1,12 @@
+ <% if Rails.env == "production" %>
+     <script type="text/javascript">
+       (function() { var p = document.createElement('script'); p.type = 'text/javascript'; p.async = true; p.src = '//d2f7h8c8hc0u7y.cloudfront.net/performable/pax/3AmAda.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(p, s); })();
++
++      <% # Begin Chartbeat Part 2 (goes right before the closing body tag) %>
++      var _sf_async_config={uid:2072,domain:"opscode.com"}; (function(){ function loadChartbeat() { window._sf_endpt=(new Date()).getTime(); var e = document.createElement('script'); e.setAttribute('language', 'javascript'); e.setAttribute('type', 'text/javascript'); e.setAttribute('src', (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") + "static.chartbeat.com/js/chartbeat.js"); document.body.appendChild(e); } var oldonload = window.onload; window.onload = (typeof window.onload != 'function') ? loadChartbeat : function() { oldonload(); loadChartbeat(); }; })();
++      <% # End Chartbeat Part 2 %>
+     </script>
+ 
+-    <!-- Begin Chartbeat Part 2 (goes right before the closing body tag) -->
+-    <script type="text/javascript"> var _sf_async_config={uid:2072,domain:"opscode.com"}; (function(){ function loadChartbeat() { window._sf_endpt=(new Date()).getTime(); var e = document.createElement('script'); e.setAttribute('language', 'javascript'); e.setAttribute('type', 'text/javascript'); e.setAttribute('src', (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") + "static.chartbeat.com/js/chartbeat.js"); document.body.appendChild(e); } var oldonload = window.onload; window.onload = (typeof window.onload != 'function') ? loadChartbeat : function() { oldonload(); loadChartbeat(); }; })(); </script>
+-    <!-- End Chartbeat Part 2 -->
+ 
+ 
+     <iframe src="https://pixel.fetchback.com/serve/fb/pdj?cat=&amp;name=landing&amp;sid=4474" scrolling="no" width="1" height="1" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+
+commit f7999143f8c1820d1d2241bd061c2722ccd24aa3
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Mar 28 16:58:11 2012 -0700
+
+    Add FetchBack pixel
+
+diff --git a/app/views/shared/_default_analytics_footer.html.erb b/app/views/shared/_default_analytics_footer.html.erb
+index cb3b294..2a051d8 100644
+--- a/app/views/shared/_default_analytics_footer.html.erb
++++ b/app/views/shared/_default_analytics_footer.html.erb
+@@ -6,6 +6,9 @@
+     <!-- Begin Chartbeat Part 2 (goes right before the closing body tag) -->
+     <script type="text/javascript"> var _sf_async_config={uid:2072,domain:"opscode.com"}; (function(){ function loadChartbeat() { window._sf_endpt=(new Date()).getTime(); var e = document.createElement('script'); e.setAttribute('language', 'javascript'); e.setAttribute('type', 'text/javascript'); e.setAttribute('src', (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") + "static.chartbeat.com/js/chartbeat.js"); document.body.appendChild(e); } var oldonload = window.onload; window.onload = (typeof window.onload != 'function') ? loadChartbeat : function() { oldonload(); loadChartbeat(); }; })(); </script>
+     <!-- End Chartbeat Part 2 -->
++
++
++    <iframe src="https://pixel.fetchback.com/serve/fb/pdj?cat=&amp;name=landing&amp;sid=4474" scrolling="no" width="1" height="1" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+ <% end %>
+ 
+ <% if GOOGLE_ANALYTICS_ID  %>
+
+commit a13f2c6479040b88fdb44b5a6de7853e6d4a8a0e
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Mar 16 15:01:11 2012 -0700
+
+    Use the new training key, not a hard-coded plan name.
+
+diff --git a/app/views/plans/_plans_and_pricing.html.erb b/app/views/plans/_plans_and_pricing.html.erb
+index 90f3c49..ac9a012 100644
+--- a/app/views/plans/_plans_and_pricing.html.erb
++++ b/app/views/plans/_plans_and_pricing.html.erb
+@@ -64,7 +64,7 @@
+         </td>
+         <% billing_plans.each do |plan| %>
+           <td class="<%= plan_css_status(plan, current_plan) %>">
+-            <% if plan[:api_key] == "platform-0411-premium" %>
++            <% if plan[:training] %>
+               Available
+             <% else %>
+               Not available
+
+commit a85b881881674520225f4aa9812e80c853af03b6
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Mar 16 15:00:55 2012 -0700
+
+    Bump oc-billing for new plans.
+
+diff --git a/Gemfile.lock b/Gemfile.lock
+index 4ceb5fb..80933ac 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -22,7 +22,7 @@ GIT
+ 
+ GIT
+   remote: git@github.com:opscode/opscode-billing.git
+-  revision: 29fe34fbaf356b55a0919d15316178fe2a6fd3d6
++  revision: 83384054521cc00b595d61b8fcffb43952e31de1
+   specs:
+     opscode-billing (0.1.0)
+ 
+
+commit 58bbc73521d6e1ebaa28776dace07f3f505cbe91
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 25 14:44:42 2012 -0800
+
+    HTTPS gravatars to prevent mixed content warning.
+
+diff --git a/config/initializers/gravatar.rb b/config/initializers/gravatar.rb
+index da14d1f..e2eb766 100644
+--- a/config/initializers/gravatar.rb
++++ b/config/initializers/gravatar.rb
+@@ -4,5 +4,5 @@ GravatarImageTag.configure do |config|
+   config.filetype      = 'png'
+   config.rating        = 'PG'
+   config.size          = 116
+-  config.secure        = false
++  config.secure        = true
+ end
+
+commit f9c3a7f2891e689a1d7039cdbcf88a4712668518
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 16:02:40 2012 -0800
+
+    More omniauth cruft.
+
+diff --git a/app/views/sessions/omniauth_callback.html.erb b/app/views/sessions/omniauth_callback.html.erb
+deleted file mode 100644
+index 7e730a2..0000000
+--- a/app/views/sessions/omniauth_callback.html.erb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-<%= javascript_tag do %>
+-  if(window.opener){
+-    window.close();
+-    window.opener.location.href='<%= @opener_url %>';
+-  }
+-  else{
+-    window.location.href='<%= @opener_url %>';
+-  }
+-<% end %>
+diff --git a/app/views/sessions/omniauth_failure.html.erb b/app/views/sessions/omniauth_failure.html.erb
+deleted file mode 100644
+index ffeb247..0000000
+--- a/app/views/sessions/omniauth_failure.html.erb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-<%= javascript_tag do %>
+-  if(window.opener){
+-    window.close();
+-  }
+-  else{
+-    window.location.href='<%= session[:location] %>';
+-  }
+-<% end %>
+
+commit 3346b97edd3d341231d664fbdaf4d4e52391f5f1
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 15:54:33 2012 -0800
+
+    This will always be now, you must be logged in to see this page and you can only see your own.
+
+diff --git a/app/views/accounts/show.html.erb b/app/views/accounts/show.html.erb
+index feba8ed..f3e1cf1 100644
+--- a/app/views/accounts/show.html.erb
++++ b/app/views/accounts/show.html.erb
+@@ -13,7 +13,6 @@
+   <div class="profilemsg">
+     <h1><%= @user.display_name if @user.display_name%></h1>
+     <span>Member for: <%=time_ago_in_words(@user.created_at)  %></span>
+-    <span>Last Login: <%=time_ago_in_words(@user.last_login) if @user.last_login.present? %> ago</span>
+     <p>
+       To add or update your avatar image, please visit <a href="http://gravatar.com" target="_blank">Gravatar</a>.
+     </p>
+
+commit 1adc648620959692ae3cfb7fd47d883bfeff187d
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 15:51:24 2012 -0800
+
+    Copy edit on profile sidebar.
+
+diff --git a/app/views/shared/_profile_sidebar.html.erb b/app/views/shared/_profile_sidebar.html.erb
+index 35935f7..4b852bf 100644
+--- a/app/views/shared/_profile_sidebar.html.erb
++++ b/app/views/shared/_profile_sidebar.html.erb
+@@ -2,9 +2,9 @@
+   <div class="block">
+     <h3 class="title">Public Profile</h3>
+     <p>
+-      To view your Opscode community profile.
++      View your user profile on the Opscode Community Site.
+     </p>
+-    <a href="<%= COMMUNITY_OPSCODE_URL %>/users/<%= current_user_name %>" class="next-link">Click Here</a>
++    <a href="<%= COMMUNITY_OPSCODE_URL %>/users/<%= current_user_name %>" class="next-link">View Profile</a>
+   </div>
+ 
+   <div class="block">
+
+commit dbdcfc1313d36174495626bc8b27076ec09fa964
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 15:51:12 2012 -0800
+
+    Cleanup menu markup a tad.
+
+diff --git a/app/views/shared/_menu_header.html.haml b/app/views/shared/_menu_header.html.haml
+index 915837f..ee5a34e 100644
+--- a/app/views/shared/_menu_header.html.haml
++++ b/app/views/shared/_menu_header.html.haml
+@@ -13,9 +13,9 @@
+     %li
+       %a{:href => MANAGE_OPSCODE_URL } Management Console
+     %li.facebook
+-      %a#facebookLink{:href => "https://www.facebook.com/pages/Opscode/99334479301"}
++      %a{:href => "https://www.facebook.com/pages/Opscode/99334479301"}
+     %li.twitter
+-      %a#twitterLink{:href => "http://twitter.com/#!/opscode"}
++      %a{:href => "http://twitter.com/#!/opscode"}
+ .menu
+   %ul
+     %li#homesMenuItem
+@@ -24,8 +24,6 @@
+     %li
+       .submenu
+         %ul
+-          %li.toparrow
+-            \
+           %li#hostedChefSM.first
+             %a.submenuArrow{:href => "/hosted-chef"} Hosted Chef
+           %li#privateChefSM
+@@ -41,8 +39,6 @@
+     %li
+       .submenu
+         %ul
+-          %li.toparrow
+-            \
+           %li#supportSM.first
+             %a.submenuArrow{:href => "/support"} Support
+           %li#trainingSM.last
+@@ -53,8 +49,6 @@
+     %li
+       .submenu
+         %ul
+-          %li.toparrow
+-            \ 
+           %li#peopleSM.first
+             %a.submenuArrow{:href => "/team"} Leadership
+           %li#boardSM
+@@ -71,8 +65,6 @@
+     %li.last
+       .submenu
+         %ul
+-          %li.toparrow
+-            \ 
+           %li#newsArchiveSM.first
+             %a.submenuArrow{:href => "/news-archive"} News
+           %li#pressReleasesSM
+
+commit 0dd2d27f4ba9e69da7ebae036b065ff2d34b9a9d
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 15:51:00 2012 -0800
+
+    Expand the disclaimer on the perm error.
+
+diff --git a/app/views/shared/_insufficient_permissions.html.erb b/app/views/shared/_insufficient_permissions.html.erb
+index aca3540..7bae1b2 100644
+--- a/app/views/shared/_insufficient_permissions.html.erb
++++ b/app/views/shared/_insufficient_permissions.html.erb
+@@ -4,7 +4,8 @@
+     <p>
+       You are not permitted to modify the billing
+       information for this organization. Please contact your account
+-      administrator to make changes.
++      administrator to make changes, or <a href="http://help.opscode.com/">contact
++      us</a> if this is in error.
+     </p>
+   </div>
+ </div>
+
+commit 105d7a4330c320d79bdf5004e9bbb7fa2011fcee
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 15:46:53 2012 -0800
+
+    Add disclaimer to the permissions error page.
+
+diff --git a/app/views/shared/_insufficient_permissions.html.erb b/app/views/shared/_insufficient_permissions.html.erb
+index 5a996fc..aca3540 100644
+--- a/app/views/shared/_insufficient_permissions.html.erb
++++ b/app/views/shared/_insufficient_permissions.html.erb
+@@ -3,7 +3,8 @@
+     <h2><%= title %></h2>
+     <p>
+       You are not permitted to modify the billing
+-      information for this organization.
++      information for this organization. Please contact your account
++      administrator to make changes.
+     </p>
+   </div>
+ </div>
+
+commit c879ec4dad76c7b7df850c8932f4ba6d1a0caab8
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 15:46:33 2012 -0800
+
+    Remove useless blank class declaration.
+
+diff --git a/app/views/shared/_footer.html.haml b/app/views/shared/_footer.html.haml
+index 9587bdf..b719849 100644
+--- a/app/views/shared/_footer.html.haml
++++ b/app/views/shared/_footer.html.haml
+@@ -1,72 +1,72 @@
+ %ul.sitemap
+   %li
+-    = link_to "Products", "http://opscode.com/products", :class => ''
++    = link_to "Products", "http://opscode.com/products"
+     %ul
+       %li
+-        = link_to "Hosted Chef", "http://opscode.com/hosted-chef", :class => ''
++        = link_to "Hosted Chef", "http://opscode.com/hosted-chef"
+       %li
+-        = link_to "Private Chef", "http://www.opscode.com/private-chef", :class => ''
++        = link_to "Private Chef", "http://www.opscode.com/private-chef"
+       %li
+-        = link_to "Chef", "http://www.opscode.com/chef", :class => ''
++        = link_to "Chef", "http://www.opscode.com/chef"
+   %li
+-    = link_to "Services & Support", "http://www.opscode.com/services-and-support", :class => ''
++    = link_to "Services & Support", "http://www.opscode.com/services-and-support"
+     %ul
+       %li
+-        = link_to "Support", "http://www.opscode.com/support", :class => ''
++        = link_to "Support", "http://www.opscode.com/support"
+       %li
+-        = link_to "Training", "http://www.opscode.com/training", :class => ''
++        = link_to "Training", "http://www.opscode.com/training"
+   %li
+-    = link_to "Newsroom", "http://www.opscode.com/newsroom", :class => ''
++    = link_to "Newsroom", "http://www.opscode.com/newsroom"
+     %ul
+       %li
+-        = link_to "In the News", "http://www.opscode.com/news-archive", :class => ''
++        = link_to "In the News", "http://www.opscode.com/news-archive"
+       %li
+-        = link_to "Press Releases", "http://www.opscode.com/press-releases", :class => ''
++        = link_to "Press Releases", "http://www.opscode.com/press-releases"
+       %li
+-        = link_to "Testimonials", "http://www.opscode.com/testimonials", :class => ''
++        = link_to "Testimonials", "http://www.opscode.com/testimonials"
+       %li
+-        = link_to "Events", "http://www.opscode.com/events", :class => ''
++        = link_to "Events", "http://www.opscode.com/events"
+       %li
+-        = link_to "Blog", "http://www.opscode.com/blog", :class => ''
++        = link_to "Blog", "http://www.opscode.com/blog"
+   %li
+-    = link_to "About", "http://www.opscode.com/about", :class => ''
++    = link_to "About", "http://www.opscode.com/about"
+     %ul
+       %li
+-        = link_to "Leadership", "http://www.opscode.com/team", :class => ''
++        = link_to "Leadership", "http://www.opscode.com/team"
+       %li
+-        = link_to "Board", "http://www.opscode.com/board-of-directors", :class => ''
++        = link_to "Board", "http://www.opscode.com/board-of-directors"
+       %li
+-        = link_to "Careers", "http://www.opscode.com/careers", :class => ''
++        = link_to "Careers", "http://www.opscode.com/careers"
+       %li
+-        = link_to "Partnerships", "http://www.opscode.com/partnerships", :class => ''
++        = link_to "Partnerships", "http://www.opscode.com/partnerships"
+       %li
+-        = link_to "Contact Us", "http://www.opscode.com/about#contact", :class => ''
++        = link_to "Contact Us", "http://www.opscode.com/about#contact"
+   %li
+-    = link_to "Customers", "http://www.opscode.com/customers", :class => ''
++    = link_to "Customers", "http://www.opscode.com/customers"
+     %ul
+       %li
+-        = link_to "IGN", "http://www.opscode.com/customers/ign", :class => ''
++        = link_to "IGN", "http://www.opscode.com/customers/ign"
+       %li
+-        = link_to "Admeld", "http://www.opscode.com/customers/admeld", :class => ''
++        = link_to "Admeld", "http://www.opscode.com/customers/admeld"
+       %li
+-        = link_to "Cycle Computing", "http://www.opscode.com/customers/cycle-computing", :class => ''
++        = link_to "Cycle Computing", "http://www.opscode.com/customers/cycle-computing"
+       %li
+-        = link_to "EA2D", "http://www.opscode.com/customers/ea2d", :class => ''
++        = link_to "EA2D", "http://www.opscode.com/customers/ea2d"
+       %li
+-        = link_to "GoTime", "http://www.opscode.com/customers/gotime", :class => ''
++        = link_to "GoTime", "http://www.opscode.com/customers/gotime"
+   %li
+     Legal
+     %ul
+       %li
+-        = link_to "Terms and Conditions of Use", "http://www.opscode.com/terms-of-service", :class => ''
++        = link_to "Terms and Conditions of Use", "http://www.opscode.com/terms-of-service"
+       %li
+-        = link_to "Privacy Policy", "http://www.opscode.com/privacy-policy", :class => ''
++        = link_to "Privacy Policy", "http://www.opscode.com/privacy-policy"
+       %li
+-        = link_to "Hosted Chef Customer Agreement", "http://www.opscode.com/hosted-chef-customer-agreement", :class => ''
++        = link_to "Hosted Chef Customer Agreement", "http://www.opscode.com/hosted-chef-customer-agreement"
+       %li
+-        = link_to "Hosted Chef Service Level Agreement", "http://www.opscode.com/service-level-agreement", :class => ''
++        = link_to "Hosted Chef Service Level Agreement", "http://www.opscode.com/service-level-agreement"
+       %li
+-        = link_to "Contributor License Agreements", "http://wiki.opscode.com/display/chef/How+to+Contribute", :class => ''
++        = link_to "Contributor License Agreements", "http://wiki.opscode.com/display/chef/How+to+Contribute"
+ .bottom
+   .logo
+   .copyright
+@@ -74,4 +74,4 @@
+     2008-2011
+     Opscode, Inc. All Rights Reserved
+   .contact
+-    = link_to "Contact Us", "http://www.opscode.com/about#contact", :class => ''
+\ No newline at end of file
++    = link_to "Contact Us", "http://www.opscode.com/about#contact"
+\ No newline at end of file
+
+commit 1b20a989470637117f30178869d0e6095d209067
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 15:46:12 2012 -0800
+
+    Pedantic: Over 9000
+
+diff --git a/app/views/shared/500.html.erb b/app/views/shared/500.html.erb
+index c7d4d55..e8266f6 100644
+--- a/app/views/shared/500.html.erb
++++ b/app/views/shared/500.html.erb
+@@ -1,2 +1,2 @@
+-<h3>We're sorry, but an error occurred while processing your request.  Our support team has been notified.  Please <%= link_to "try again", :back %> later
+- or visit <a href="http://help.opscode.com">help.opscode.com</a> for assistance.  Thank you for your patience.</h3>
++<h3>We're sorry, but an error occurred while processing your request. Our support team has been notified. Please <%= link_to "try again", :back %> later
++ or visit <a href="http://help.opscode.com/">help.opscode.com</a> for assistance. Thank you for your patience.</h3>
+
+commit daea0d5673b9ebde0a8d5b5bf8219804458b44b4
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 15:45:53 2012 -0800
+
+    String tweak.
+
+diff --git a/app/views/shared/404.html.erb b/app/views/shared/404.html.erb
+index 98448ed..edbf265 100644
+--- a/app/views/shared/404.html.erb
++++ b/app/views/shared/404.html.erb
+@@ -1,3 +1,3 @@
+ <h1>Page not found.</h1>
+ 
+-<h2>Return to <a href="/account">Opscode - Account Management</a>.</h2>
++<h2>Return to <a href="/account">Account Management</a>.</h2>
+
+commit 9f79fdc8c51ea7ed3fe08988e5dde815549ae923
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 15:45:44 2012 -0800
+
+    Remove unused partial.
+
+diff --git a/app/views/shared/_account_subnav.html.haml b/app/views/shared/_account_subnav.html.haml
+deleted file mode 100644
+index 9af6b9c..0000000
+--- a/app/views/shared/_account_subnav.html.haml
++++ /dev/null
+@@ -1,23 +0,0 @@
+-#pageBody
+-  #productMenu
+-    %table{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+-      %tr
+-        %td{:align => "center"}
+-          = image_tag("spacer.gif", :height=>14,:width=> 21, :border=>0)
+-        %td{:align => "center"}
+-          = image_tag("spacer.gif", :height=>14,:width=> 21, :border=>0)
+-        %td{:align => "center"}
+-          = image_tag("spacer.gif", :height=>14,:width=> 21, :border=>0)
+-        %td{:align => "center"}
+-          = image_tag("spacer.gif", :height=>14,:width=> 21, :border=>0)
+-      %tr
+-        %td
+-          = link_to "My Profile", profile_account_path, :class=>"pageMenuItem"
+-        %td
+-          = link_to "Change Password", password_account_path, :class=>"pageMenuItem"
+-        %td
+-          = link_to "View/Edit Plan", "#", :class=> "pageMenuItem"
+-        %td
+-          = link_to "Billing", "#", :class=>"pageMenuItem"
+-
+--# TODO: Tab highlighting functionality should be changed to CSS
+
+commit 802b11f801d010f3138453891cf32c9bed93ee71
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 14:51:19 2012 -0800
+
+    Remove unused duplicate of standard rails helper.
+
+diff --git a/app/helpers/application_helper.rb b/app/helpers/application_helper.rb
+index 3203406..0d954ef 100644
+--- a/app/helpers/application_helper.rb
++++ b/app/helpers/application_helper.rb
+@@ -2,30 +2,6 @@ module ApplicationHelper
+   def linked_user_pic(user, options)
+     link_to(gravatar_image_tag(user.email, options.reverse_merge(:title => user.name, :alt => user.name)), account_path)
+   end
+- 
+-  def time_ago_in_words_abbr from_time
+-    from_time = from_time.to_time if from_time.respond_to?(:to_time)
+-    to_time = Time.now
+-    distance_in_minutes = (((to_time - from_time).abs)/60).round
+-    distance_in_days = distance_in_minutes/(60*24).round
+-
+-    time_str = case distance_in_minutes
+-    when 0..55
+-      "#{distance_in_minutes} min"
+-    when 56..89
+-      "1 hr"
+-    when 90..1439
+-      "#{(distance_in_minutes.to_f / 60.0).round} hrs"
+-    when 1440..2880
+-      "1 day"
+-    when 2881..525600
+-      from_time.strftime "%b %d"
+-    else
+-      from_time.strftime "%Y"
+-    end
+-
+-    [time_str, distance_in_days]
+-  end
+ 
+   def account_naviation_image( service_name, service_action = nil )
+     if service_name == controller_name and ( !service_action or service_action == action_name )
+
+commit 9abc031985b79aeeb4066434943c1d2dc561b5af
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 14:46:00 2012 -0800
+
+    Remove unused omniauth stuffs.
+
+diff --git a/app/helpers/accounts_helper.rb b/app/helpers/accounts_helper.rb
+deleted file mode 100644
+index 91e818a..0000000
+--- a/app/helpers/accounts_helper.rb
++++ /dev/null
+@@ -1,40 +0,0 @@
+-module AccountsHelper
+-  def linkedin_image 
+-    image_tag("linkedinLogo.png", :title => "LinkedIn")
+-  end
+-
+-  def link_to_linkedin
+-    if user_linkedin 
+-      content = content_tag(:p, (link_to (linkedin_image << unlink_provider(user_linkedin)), user_linkedin.profile_url, :target=>"_blank"))
+-      content << content_tag(:p, (link_to user_linkedin.profile_url, user_linkedin.profile_url, :target=>"_blank"))
+-    else
+-      content_tag(:p, (link_to linkedin_image, "/auth/linkedin", :class => "omniauth"))
+-    end
+-  end 
+-  
+-  def github_image
+-    image_tag("githubLogo.png", :title => "Github")
+-  end
+-
+-  def link_to_github
+-    if user_github
+-      content = content_tag(:p, (link_to (github_image << unlink_provider(user_github) ), user_github.profile_url, :target=>"_blank"))
+-      content << content_tag(:p, (link_to user_github.profile_url, user_github.profile_url, :target=>"_blank"))
+-    else
+-      content_tag(:p, (link_to github_image, "/auth/github", :class => "omniauth"))
+-    end
+-  end
+-
+-  def unlink_provider(provider)
+-    link_to("Unlink", destroy_provider_account_path(provider.id), :method => :delete, :confirm => "Are you sure you want to unlink your #{provider.provider}?")
+-  end 
+-  
+-  def user_linkedin
+-    current_user.community_user.linkedin
+-  end
+-
+-  def user_github
+-    current_user.community_user.github
+-  end
+-
+-end
+
+commit 5b140996ba30f9622a4811889c6f76bc7768457e
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 14:17:50 2012 -0800
+
+    Remove now-unused helper.
+
+diff --git a/app/helpers/billings_helper.rb b/app/helpers/billings_helper.rb
+index f2db2f0..e868e93 100644
+--- a/app/helpers/billings_helper.rb
++++ b/app/helpers/billings_helper.rb
+@@ -38,11 +38,5 @@ module BillingsHelper
+     contact_info << content_tag(:span, "Email: #{customer.email}") unless customer.email.blank?
+     contact_info.html_safe
+   end
+-  
+-  def subscription_billing_info 
+-    credit_card = @organization.subscription.credit_card
+-    state_zip = [credit_card.billing_state, credit_card.billing_zip].delete_if{ |address| address.blank? }.join(' - ')
+-    [state_zip, credit_card.billing_country].delete_if { |address| address.blank? }.join(' , ')
+-  end
+ 
+ end
+
+commit 787ab5af773b98720c20ff30108ef1f77cbbeddb
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Fri Jan 20 14:16:30 2012 -0800
+
+    Fix contact and billing info display to be more normal.
+
+diff --git a/app/helpers/billings_helper.rb b/app/helpers/billings_helper.rb
+index 560cc46..f2db2f0 100644
+--- a/app/helpers/billings_helper.rb
++++ b/app/helpers/billings_helper.rb
+@@ -33,8 +33,7 @@ module BillingsHelper
+   def organization_contact_info
+     customer = @organization.subscription.customer
+     contact_info = ""
+-    contact_info << content_tag(:span, "First Name: #{customer.first_name}") unless customer.first_name.blank?
+-    contact_info << content_tag(:span, "Last Name: #{customer.last_name}") unless customer.last_name.blank?
++    contact_info << content_tag(:span, "#{customer.first_name} #{customer.last_name}") unless customer.first_name.blank? && customer.last_name.blank?
+     contact_info << content_tag(:span, "Phone: #{customer.phone}") unless customer.phone.blank?
+     contact_info << content_tag(:span, "Email: #{customer.email}") unless customer.email.blank?
+     contact_info.html_safe
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index 51ed11a..3dbc177 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -48,11 +48,14 @@
+         <h1>Billing Information</h1>
+         <div class="address">
+           <% if subscription.credit_card %>
+-              <span><%= "#{subscription.credit_card.first_name} #{subscription.credit_card.last_name}" %></span>
++              <span><%= subscription.credit_card.first_name %> <%= subscription.credit_card.last_name %></span>
+               <span><%= subscription.credit_card.billing_address %></span>
+               <span><%= subscription.credit_card.billing_address_2 %></span>
+-              <span><%= subscription.credit_card.billing_city %></span>
+-              <span><%= subscription_billing_info %></span>
++              <span><%= subscription.credit_card.billing_city %>, <%= subscription.credit_card.billing_state %></span>
++              <span><%= subscription.credit_card.billing_zip %></span>
++              <% if subscription.credit_card.billing_country != 'US' %>
++              <span><%= subscription.credit_card.billing_country %></span>
++              <% end %>
+               <span>Credit Card: <%= subscription.credit_card.masked_card_number rescue nil %></span>
+           <% else %>
+             <span>No credit card on file.</span>
+
+commit 598a68542eec2262041bd4a16450ca62cb2d9bd8
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Jan 19 14:58:41 2012 -0800
+
+    Setup the cache key namespace so we don't collide with other redis users.
+    
+    Also use the hash style since the other way was silly.
+
+diff --git a/config/application.rb b/config/application.rb
+index 8babb18..6c069d2 100644
+--- a/config/application.rb
++++ b/config/application.rb
+@@ -54,9 +54,15 @@ module OpscodeAccountmanagement
+     #Override error div class
+     config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<div class='fieldWithErrors'>#{html_tag}</div>".html_safe }
+ 
++    # Configure Redis backend for cache
+     redis_config_file = File.join(Rails.root, "/config/redis.yml")
+     redis_config = YAML.load(File.read(redis_config_file))[Rails.env].symbolize_keys
+-    redis_uri = "redis://#{redis_config[:host] || "localhost"}:#{redis_config[:port] || 6379}/#{redis_config[:database] || 1}"
+-    config.cache_store = :redis_store, redis_uri
++    redis_options = {
++      :host => redis_config[:host] || "localhost",
++      :port => redis_config[:port] || 6379,
++      :db => redis_config[:db] || 1,
++      :namespace => redis_config[:namespace] || "acctmgmt-#{Rails.env}"
++    }
++    config.cache_store = :redis_store, redis_options
+   end
+ end
+
+commit 0b954cd34a5129b45d3f6e9d3cfba8c0a5f72a1b
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Jan 19 12:51:42 2012 -0800
+
+    More detailed comment about how Rails is insane.
+
+diff --git a/app/models/subscription.rb b/app/models/subscription.rb
+index eb5099e..863827a 100644
+--- a/app/models/subscription.rb
++++ b/app/models/subscription.rb
+@@ -21,7 +21,9 @@ class Subscription < OpscodePaymentService
+   end
+ 
+   def statements(organization)
+-    # Touch the constant to force Rails to load the class. I refuse to believe this is the right way to handle this.
++    # Forcibly load statement.rb into memory and find the class.
++    # This is required because the cache system uses unmarshal, which won't try
++    # to load the class itself and will just error.
+     Statement
+     Rails.cache.fetch(cache_path, :expires_in => 5.minutes) do
+       # each statement hash  changed to Statement class instance and return the Statement class instance collections
+
+commit 99747e1bbe0062005f922d409f280a4f553b61a1
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 18 22:36:04 2012 -0800
+
+    Force load the Statement model before trying to unmarshal because I don't understand Rails model loading.
+    
+    Someone please tell me how to do this better?
+
+diff --git a/app/models/subscription.rb b/app/models/subscription.rb
+index 47814fa..eb5099e 100644
+--- a/app/models/subscription.rb
++++ b/app/models/subscription.rb
+@@ -7,7 +7,7 @@ class Subscription < OpscodePaymentService
+   def transactions(options = {})
+     Transaction.all({ :params => { :subscription_id => id } }.merge(options))
+   end
+-  
++
+   def is_creditcard_payment
+     credit_card.present? # TODO: would be changed
+   end
+@@ -21,6 +21,8 @@ class Subscription < OpscodePaymentService
+   end
+ 
+   def statements(organization)
++    # Touch the constant to force Rails to load the class. I refuse to believe this is the right way to handle this.
++    Statement
+     Rails.cache.fetch(cache_path, :expires_in => 5.minutes) do
+       # each statement hash  changed to Statement class instance and return the Statement class instance collections
+       get("statements").collect{|statement| Statement.new(statement)}.
+@@ -37,5 +39,5 @@ class Subscription < OpscodePaymentService
+     last_transaction_id = last_transaction ? last_transaction.id : 0
+     "subscription-#{id}-#{last_transaction_id}-#{suffix}"
+   end
+-  
++
+ end
+
+commit 65fbe1c14da26002f5c3706702c7f99282fb373e
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 18 22:35:33 2012 -0800
+
+    Cache timeout is 5 minutes for this.
+
+diff --git a/app/models/subscription.rb b/app/models/subscription.rb
+index 2d1bb26..47814fa 100644
+--- a/app/models/subscription.rb
++++ b/app/models/subscription.rb
+@@ -21,7 +21,7 @@ class Subscription < OpscodePaymentService
+   end
+ 
+   def statements(organization)
+-    Rails.cache.fetch(cache_path) do
++    Rails.cache.fetch(cache_path, :expires_in => 5.minutes) do
+       # each statement hash  changed to Statement class instance and return the Statement class instance collections
+       get("statements").collect{|statement| Statement.new(statement)}.
+         select{|statement| statement.closed_at.present? and ( organization[:assigned_at].nil? or Time.parse(statement.created_at) >= Time.parse(organization[:assigned_at]) )}.
+
+commit bf8ff44020b0dea6621da44e05cc55a1eeeaf8dd
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 18 22:35:01 2012 -0800
+
+    Define the class used for the items of the events array on a statement so that we can marshal/unmarshal them.
+
+diff --git a/app/models/statement.rb b/app/models/statement.rb
+index ec61b23..8bfc403 100644
+--- a/app/models/statement.rb
++++ b/app/models/statement.rb
+@@ -1,5 +1,9 @@
+ class Statement < OpscodePaymentService
+ 
++  # Statically pre-create the internal class so that unmarshal works
++  class Event < OpscodePaymentService
++  end
++
+   def settled_date
+     settled_at.blank? ? nil : Time.parse( settled_at )
+   end
+
+commit 32522423bf8525e71995d4d6393174355696eb67
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 18 22:16:11 2012 -0800
+
+    Setup redis as the cache backend and include a default config file pointing at localhost.
+
+diff --git a/Gemfile b/Gemfile
+index 1724602..ecc8838 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -18,6 +18,7 @@ gem "opscode-json-session", :git => "git@github.com:opscode/opscode-shared", :br
+ gem "therubyracer"
+ gem "exception_notification"
+ gem "unicorn"
++gem "redis-store"
+ 
+ group :assets do
+   gem 'sass-rails',   '~> 3.1.4'
+diff --git a/Gemfile.lock b/Gemfile.lock
+index 121cada..4ceb5fb 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -226,6 +226,9 @@ GEM
+     rake (0.9.2.2)
+     rdoc (3.11)
+       json (~> 1.4)
++    redis (2.2.2)
++    redis-store (1.0.0.1)
++      redis (~> 2.2.1)
+     rest-client (1.6.7)
+       mime-types (>= 1.16)
+     rspec (2.7.0)
+@@ -309,6 +312,7 @@ DEPENDENCIES
+   opscode-json-session!
+   rails (= 3.1.1)
+   rake
++  redis-store
+   rspec-rails
+   sass-rails (~> 3.1.4)
+   therubyracer
+diff --git a/config/application.rb b/config/application.rb
+index 01d90f1..8babb18 100644
+--- a/config/application.rb
++++ b/config/application.rb
+@@ -53,5 +53,10 @@ module OpscodeAccountmanagement
+ 	
+     #Override error div class
+     config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<div class='fieldWithErrors'>#{html_tag}</div>".html_safe }
++
++    redis_config_file = File.join(Rails.root, "/config/redis.yml")
++    redis_config = YAML.load(File.read(redis_config_file))[Rails.env].symbolize_keys
++    redis_uri = "redis://#{redis_config[:host] || "localhost"}:#{redis_config[:port] || 6379}/#{redis_config[:database] || 1}"
++    config.cache_store = :redis_store, redis_uri
+   end
+ end
+diff --git a/config/redis.yml b/config/redis.yml
+new file mode 100644
+index 0000000..02abf7c
+--- /dev/null
++++ b/config/redis.yml
+@@ -0,0 +1,11 @@
++development:
++  host: localhost
++
++test:
++  host: localhost
++
++production:
++  host: localhost
++
++cucumber:
++  host: localhost
+
+commit dbdee05cf5065239ef8aaecc0123f1ae52e398e8
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Jan 12 14:40:21 2012 -0500
+
+    Revert the label due to CSS alignment issues.
+    
+    Will revisit this later.
+
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index 4e9c378..ea66192 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -9,7 +9,7 @@
+               <%= link_to "View", account_organization_billing_invoice_path(organization["name"], current_invoice.id), 
+                     :class => "button invoice_fancybox" %>
+               <% if current_plan_name( organization["billing_plan"] ) != "Free" %>
+-                <%= link_to "Update Payment Method", generate_chargify_url(subscription.id), :class => "button edit_customer_profile" %>
++                <%= link_to "Pay Bill", generate_chargify_url(subscription.id), :class => "button edit_customer_profile" %>
+               <% end %>
+             </div>
+           <% end %>
+
+commit a5346bab54032f733359921fffa896ec5b787cb6
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Jan 12 13:55:29 2012 -0500
+
+    Retitle the Pay Now button to make it clearer what it actually does.
+
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index 2c1d8a9..02876bc 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -8,7 +8,7 @@
+             <div class="payBill">
+               <a href="<%= account_organization_billing_invoice_path( :organization_id => organization["name"], :id => current_invoice.id ) %>" class="button invoice_fancybox">View</a>
+               <% if current_plan_name( organization["billing_plan"] ) != "Free" %>
+-                <a href="<%= pay_bill_account_organization_billing_path(organization["name"]) %>" class="button">Pay Bill</a>
++                <a href="<%= pay_bill_account_organization_billing_path(organization["name"]) %>" class="button">Update Payment Method</a>
+               <% end %>
+             </div>
+           <% end %>
+
+commit f15b20bd24faa5dfe60100038251b716562c6b87
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 11 15:47:42 2012 -0500
+
+    The last merge reanimated this code incorrectly. git fail.
+
+diff --git a/app/views/accounts/_profile.html.erb b/app/views/accounts/_profile.html.erb
+index a9b6596..cfb3796 100644
+--- a/app/views/accounts/_profile.html.erb
++++ b/app/views/accounts/_profile.html.erb
+@@ -42,20 +42,6 @@
+       <span class="formError"><%= @user.errors[:email][0] if @user.errors[:email].present? %></span>
+     </fieldset>
+   </div>
+-  
+-  <% if @user.community_user.linkedin %>
+-    <div class="mailInfo">
+-      <h3>Share my activities:</h3>
+-      <%= f.fields_for :linkedin_attributes, @user.community_user.linkedin do |linkedin| %>
+-        <p>
+-          <%= linkedin.hidden_field :id %>
+-        </p>
+-        <p>
+-          <%= linkedin.check_box :share%> Linkedin
+-        </p>
+-      <% end %>
+-    </div>
+-  <% end %>
+ 
+   <div class="mailInfo">
+     <h3>Email me when:</h3>
+@@ -95,13 +81,6 @@
+     </p>
+   </div>
+ 
+-  <div class="border"></div>
+-  <h3>Link my profile</h3>
+-  <div class='linkedIn'> 
+-    <%= link_to_linkedin %>
+-    <%= link_to_github %>
+-  </div>
+-
+   <%= f.submit "Save Changes" %>
+  
+ <% end %>
+diff --git a/app/views/sessions/new.html.erb b/app/views/sessions/new.html.erb
+index 0c278fa..2cdd540 100644
+--- a/app/views/sessions/new.html.erb
++++ b/app/views/sessions/new.html.erb
+@@ -4,15 +4,6 @@
+   </div>
+ <% end %>
+ 
+-<div class='signIn'>
+-  <div class='linkedinLogoText'>
+-    <h2 class='form-header'>Signin Using:</h2>
+-  </div>
+-  <div class='linkedinLogo'>
+-    <%= link_to image_tag("linkedinLogo.png", :title => "LinkedIn"), "/auth/linkedin", :class=>"omniauth" %>
+-  </div>
+-</div>
+-<h2>(or)</h2>
+ <h2>Opscode Platform Signin</h2>
+ 
+ <%= form_tag(account_session_path, :class => "standard")  do %>
+
+commit 9476dbba78c9e133f0bdc1a0b4fcffe8e78e6bf7
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 11 15:47:26 2012 -0500
+
+    Missed a conflict.
+
+diff --git a/app/assets/stylesheets/_account.scss b/app/assets/stylesheets/_account.scss
+index ad1a1c0..f280237 100644
+--- a/app/assets/stylesheets/_account.scss
++++ b/app/assets/stylesheets/_account.scss
+@@ -397,11 +397,7 @@ h2.accounthead {
+   .orgInfo {
+     float: left;
+     width: 44%; } 
+-<<<<<<< HEAD
+-  .billingInfo1 {
+-=======
+   .creditCardInfo {
+->>>>>>> origin/release-sprint-4
+     float: left;
+     width: 48%;
+     min-height: 240px;
+
+commit 51894c57470d73b1df3fdaf3f7414f59320232f9
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 11 15:25:25 2012 -0500
+
+    This shouldn't ever get checked in.
+
+diff --git a/.rvmrc b/.rvmrc
+deleted file mode 100644
+index 08dd0a7..0000000
+--- a/.rvmrc
++++ /dev/null
+@@ -1 +0,0 @@
+-rvm use 1.9.3
+
+commit 4bdc384d873bf59bc84095e320fe96c8faabaa2a
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 11 15:22:39 2012 -0500
+
+    Add a row showing when the org was created.
+
+diff --git a/app/views/billings/_billing_history.html.erb b/app/views/billings/_billing_history.html.erb
+index a3a8ddb..6cb5cd4 100644
+--- a/app/views/billings/_billing_history.html.erb
++++ b/app/views/billings/_billing_history.html.erb
+@@ -22,7 +22,11 @@
+       </tr>
+     <% end %>
+     <% if invoices.empty? %>
+-    <tr class="not-found"><td colspan="7">No invoices found.</td></tr>
++      <tr class="not-found"><td colspan="7">No invoices found.</td></tr>
+     <% end %>
++    <tr class="org-created">
++      <td><%= format_invoice_date(Time.parse(organization[:assigned_at])) %></td>
++      <td>Organization created</td>
++    </tr>
+   </table>
+ </div>
+
+commit f9060c4485bcc461b10fc0c8c1f677823a3123c7
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 11 15:22:11 2012 -0500
+
+    Use the header font only for the header in the billing history table.
+
+diff --git a/app/assets/stylesheets/_account.scss b/app/assets/stylesheets/_account.scss
+index b3262cf..623941e 100644
+--- a/app/assets/stylesheets/_account.scss
++++ b/app/assets/stylesheets/_account.scss
+@@ -338,11 +338,11 @@ h2.accounthead {
+     border-collapse: collapse;
+     margin: 0 auto; }
+   td, th {
+-    font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif;
+     text-align: center; }
+   td {
+     padding: 4px 0px; }
+   th {
++    @include opscode-header-font;
+     border-bottom: 1px solid #ccc;
+     padding: 7px 0px;
+     font-weight: normal;
+
+commit 400e74e6317886fcfcd68f60049b272d5593c93b
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 11 15:21:57 2012 -0500
+
+    Kill whitespace.
+
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index 8ffafc6..feb8b81 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -30,7 +30,7 @@
+             <span>Amount: <%= currency_format( subscription.balance_in_cents ) %></span>
+             <span>Bill Date: <%= format_invoice_date(current_invoice.opened_date) %> - <%= format_invoice_date(current_invoice.closed_date) %></span>
+           </div>
+-        <% end %>              
++        <% end %>
+       </div>
+     </div>
+     <div class="billingInfo">
+
+commit 91992288d5f8c0bcd85cb3a1db401cca9742da93
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 11 15:21:38 2012 -0500
+
+    Need to parse the assigned date too.
+
+diff --git a/app/models/subscription.rb b/app/models/subscription.rb
+index 4986d77..2a95a76 100644
+--- a/app/models/subscription.rb
++++ b/app/models/subscription.rb
+@@ -26,7 +26,7 @@ class Subscription < OpscodePaymentService
+ 
+   def statements(organization)
+     # each statement hash  changed to Statement class instance and return the Statement class instance collections
+-    get("statements").collect{|statement| Statement.new(statement)}.select{|statement| Time.parse(statement.created_at) >= organization[:assigned_at]}.sort_by{|statement| Time.parse(statement.created_at)}.reverse
++    get("statements").collect{|statement| Statement.new(statement)}.select{|statement| Time.parse(statement.created_at) >= Time.parse(organization[:assigned_at])}.sort_by{|statement| Time.parse(statement.created_at)}.reverse
+   end
+   
+ end
+
+commit cf082d3ed7e8c32357dd11f2eef693b0848ca68c
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 11 15:21:18 2012 -0500
+
+    Include the full UTC timestamp in a mouseover.
+
+diff --git a/app/helpers/billings_helper.rb b/app/helpers/billings_helper.rb
+index 64e5b77..e13329a 100644
+--- a/app/helpers/billings_helper.rb
++++ b/app/helpers/billings_helper.rb
+@@ -2,7 +2,7 @@ module BillingsHelper
+   def format_invoice_date( date )
+     if date.present?
+       date = Time.parse(date) if date.is_a?(String)
+-      date.strftime("%m/%d/%Y")
++      content_tag(:span, date.strftime("%m/%d/%Y"), :title => date.utc.to_s)
+     end
+   end
+ 
+
+commit 43d2db412e1ef8e9e49d5631f0d1539e9ed945c5
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Mon Jan 9 23:27:39 2012 -0500
+
+    Use the Rails logger, not the chef logger.
+
+diff --git a/app/controllers/billings_controller.rb b/app/controllers/billings_controller.rb
+index 5114229..0e30669 100644
+--- a/app/controllers/billings_controller.rb
++++ b/app/controllers/billings_controller.rb
+@@ -24,7 +24,7 @@ class BillingsController < ApplicationController
+       opscode_user_api(current_user.username).put_rest("organizations/#{params[:organization_id]}", :billing_contact => params[:billing_contact])
+       redirect_to account_organization_billing_path(params["organization_id"]), :notice=>"Organization contact information updated successfully"
+     rescue Net::HTTPServerException => error
+-      Chef::Log.error("#{error.class.name}: #{error.message}")
++      logger.error("#{error.class.name}: #{error.message}")
+       redirect_to account_organization_billing_path(params["organization_id"]), :notice=>"Unable to update organization contact information"
+     end
+   end
+diff --git a/app/controllers/plans_controller.rb b/app/controllers/plans_controller.rb
+index f72c0b5..16423cd 100644
+--- a/app/controllers/plans_controller.rb
++++ b/app/controllers/plans_controller.rb
+@@ -68,7 +68,7 @@ class PlansController < ApplicationController
+       flash[:notice] = "Plan changed successfully."
+     rescue Net::HTTPServerException => error
+       flash[:error] = "Unable to change the plan."
+-      Chef::Log.error("#{error.class.name}: #{error.message}")
++      logger.error("#{error.class.name}: #{error.message}")
+     end
+   end
+ 
+
+commit c7235b4b492bd8c892cb4e9bcbf270065e64f20f
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Mon Jan 9 18:29:36 2012 -0500
+
+    Move the rails_env JS to the end as well, missed this initially.
+
+diff --git a/app/views/layouts/application.html.erb b/app/views/layouts/application.html.erb
+index ed64b1e..f36b6b5 100644
+--- a/app/views/layouts/application.html.erb
++++ b/app/views/layouts/application.html.erb
+@@ -6,9 +6,6 @@
+     <%= stylesheet_link_tag "application" %>
+     <%= javascript_include_tag "modernizr" %>
+     <%= csrf_meta_tags %>
+-    <%= javascript_tag do %>
+-      $.RAILS_ENV = "<%= Rails.env %>";
+-    <% end %>
+     <link rel="icon" href="/favicon.png" type="image/png" />
+     <link rel="shortcut icon" href="/favicon.ico" />
+   </head>
+@@ -33,5 +30,8 @@
+       </div>
+     </div>
+     <%= javascript_include_tag "application" %>
++    <%= javascript_tag do %>
++      $.RAILS_ENV = "<%= Rails.env %>";
++    <% end %>
+   </body>
+ </html>
+
+commit dd0a8199ff515b7f7a57bc3750526a73afe12936
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Mon Jan 9 18:24:53 2012 -0500
+
+    No idea why this got put back in. If a page needs a BFC, that should be set individually.
+
+diff --git a/app/assets/stylesheets/_account.scss b/app/assets/stylesheets/_account.scss
+index 5334587..b3262cf 100644
+--- a/app/assets/stylesheets/_account.scss
++++ b/app/assets/stylesheets/_account.scss
+@@ -829,7 +829,3 @@ body.sessions.new {
+     width: 276px;
+   }
+ }
+-
+-.main-content {
+-  width: 71%;
+-}
+
+commit 12e631ae84ecb01a1739612ca2c9a44dc61aa45b
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Mon Jan 9 18:24:29 2012 -0500
+
+    Another copy edit.
+
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index 85a85dd..8ffafc6 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -16,7 +16,7 @@
+         <% if !current_invoice || current_invoice.is_settled %>
+           <div>
+             <span>
+-              You are up to date and your next billing will be generated on
++              You are up to date and you will next be billed on
+               <%= format_invoice_date(subscription.current_period_ends_at) %>.
+             </span>
+           </div>
+
+commit 495584327c11fedca7f616dba8482e3360e99b1c
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Mon Jan 9 18:18:50 2012 -0500
+
+    Minor copy edit.
+
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index 82b7079..85a85dd 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -60,7 +60,7 @@
+               <% end %>
+               <span>Credit Card: <%= subscription.credit_card.masked_card_number rescue nil %></span>
+           <% else %>
+-            <span> The billing information is not available for the current organization. Please click on edit button for update. </span>
++            <span> The billing information is not available for this organization. Please click Edit below to add a payment method.</span>
+           <% end %>
+         </div>
+         <div class="control">
+
+commit bc540a281b548b9a511654bd6d2b1eff84e633c5
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Jan 4 13:28:00 2012 -0800
+
+    Use the new Org.assigned_at field to hide invoices from before the org was assigned.
+
+diff --git a/app/assets/stylesheets/_account.scss b/app/assets/stylesheets/_account.scss
+index 27ea0af..d7a1220 100644
+--- a/app/assets/stylesheets/_account.scss
++++ b/app/assets/stylesheets/_account.scss
+@@ -350,7 +350,11 @@ h2.accounthead {
+   tr.pending-status td, th {
+     color: #000; }
+   td.amount {
+-    text-align: right; } }
++    text-align: right; }
++  .not-found {
++    text-align: center;
++  }
++}
+ 
+ .amount {
+   text-align: right; }
+diff --git a/app/controllers/billings_controller.rb b/app/controllers/billings_controller.rb
+index f27aec8..def7370 100644
+--- a/app/controllers/billings_controller.rb
++++ b/app/controllers/billings_controller.rb
+@@ -3,7 +3,7 @@ class BillingsController < ApplicationController
+   def show
+     @organization = current_user.find_organization(params[:organization_id])
+     @subscription = @organization.subscription
+-    @invoices = @subscription.statements
++    @invoices = @subscription.statements(@organization)
+     @current_invoice = @invoices.first
+   end
+ 
+diff --git a/app/models/subscription.rb b/app/models/subscription.rb
+index ec51237..5406ffa 100644
+--- a/app/models/subscription.rb
++++ b/app/models/subscription.rb
+@@ -28,9 +28,9 @@ class Subscription < OpscodePaymentService
+     !current_invoice or current_invoice.is_settled
+   end
+ 
+-  def statements
++  def statements(organization)
+     # each statement hash  changed to Statement class instance and return the Statement class instance collections
+-    get("statements").collect{|statement| Statement.new(statement)}.sort_by{|statement| Time.parse(statement.created_at)}.reverse
++    get("statements").collect{|statement| Statement.new(statement)}.select{|statement| Time.parse(statement.created_at) >= organization[:assigned_at]}.sort_by{|statement| Time.parse(statement.created_at)}.reverse
+   end
+   
+ end
+diff --git a/app/views/billings/_billing_history.html.erb b/app/views/billings/_billing_history.html.erb
+index 7cbf834..a3a8ddb 100644
+--- a/app/views/billings/_billing_history.html.erb
++++ b/app/views/billings/_billing_history.html.erb
+@@ -21,5 +21,8 @@
+         <td><a href="<%= account_organization_billing_invoice_path( :organization_id => organization["name"], :id => invoice.id ) %>" class="invoice_fancybox">View Details</a></td>
+       </tr>
+     <% end %>
++    <% if invoices.empty? %>
++    <tr class="not-found"><td colspan="7">No invoices found.</td></tr>
++    <% end %>
+   </table>
+ </div>
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index 62bf020..91a83cd 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -4,7 +4,7 @@
+       <div class="currentInvoice">
+         <div class="invoiceTitle">
+           <div class="orgInfo"><h1>Current Invoice </h1></div>
+-          <% if !current_invoice.is_settled %>
++          <% if current_invoice && !current_invoice.is_settled %>
+             <div class="payBill">
+               <a href="<%= account_organization_billing_invoice_path( :organization_id => organization["name"], :id => current_invoice.id ) %>" class="button invoice_fancybox">View</a>
+               <% if current_plan_name( organization["billing_plan"] ) != "Free" %>
+@@ -13,7 +13,7 @@
+             </div>
+           <% end %>
+         </div>
+-        <% if current_invoice.is_settled %>
++        <% if !current_invoice || current_invoice.is_settled %>
+           <div>
+             <span>
+               You are up to date and your next billing will be generated on
+
+commit 7641e6ec965c90602911136655572e51f794afa6
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 29 21:36:32 2011 -0800
+
+    Fix the issue with modernizr.
+
+diff --git a/config/compass.rb b/config/compass.rb
+index 8853982..f8e4727 100644
+--- a/config/compass.rb
++++ b/config/compass.rb
+@@ -8,3 +8,7 @@ if defined?(OpscodeAccountmanagement::Application)
+       File.join(Compass::Frameworks["opscode-chrome"].templates_directory, 'project', dir_name)
+   }
+ end
++
++# Make sure modernizr gets output by the assets precompile. Really only needed in
++# production, but put it here so we remember.
++OpscodeAccountmanagement::Application.config.assets.precompile << 'modernizr.js'
+
+commit 1583126a2e499393fd2aed5e7a8e923139898bad
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 29 13:19:54 2011 -0800
+
+    Revert "Hide the PDF button because there is no way we can launch with this feature."
+    
+    This reverts commit c0f60160fb6e59e3ecfa1b1cb5231ec54ccb64e7.
+
+diff --git a/app/views/invoices/show.html.erb b/app/views/invoices/show.html.erb
+index 0a51b96..2e42a33 100644
+--- a/app/views/invoices/show.html.erb
++++ b/app/views/invoices/show.html.erb
+@@ -8,6 +8,8 @@
+       <% if current_plan_name( @organization["billing_plan"] ) != "Free" and !@invoice.is_settled  %>
+         <a href="<%= pay_bill_account_organization_billing_path(@organization["name"]) %>" class="button">Pay Now</a>
+       <% end %>
++      <% pdflink = account_organization_billing_invoice_path(:organization_id => @organization["name"], :id => @invoice.id, :format => :pdf) %>
++      <a href="<%= pdflink %>" class="button">PDF</a>
+     </div>
+   </div>
+   <div class="invoiceInformation">
+
+commit c0f60160fb6e59e3ecfa1b1cb5231ec54ccb64e7
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 29 11:22:01 2011 -0800
+
+    Hide the PDF button because there is no way we can launch with this feature.
+    
+    The Ubuntu-packaged wkhtmltopdf wants to connect to an X server, to run headless we apparently need to build our own.
+
+diff --git a/app/views/invoices/show.html.erb b/app/views/invoices/show.html.erb
+index 2e42a33..0a51b96 100644
+--- a/app/views/invoices/show.html.erb
++++ b/app/views/invoices/show.html.erb
+@@ -8,8 +8,6 @@
+       <% if current_plan_name( @organization["billing_plan"] ) != "Free" and !@invoice.is_settled  %>
+         <a href="<%= pay_bill_account_organization_billing_path(@organization["name"]) %>" class="button">Pay Now</a>
+       <% end %>
+-      <% pdflink = account_organization_billing_invoice_path(:organization_id => @organization["name"], :id => @invoice.id, :format => :pdf) %>
+-      <a href="<%= pdflink %>" class="button">PDF</a>
+     </div>
+   </div>
+   <div class="invoiceInformation">
+
+commit c3d1ea370752975a30edc2319db8f15e5f075c2d
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 29 11:05:10 2011 -0800
+
+    Move main JS to the body for Moar Speed and add modernizr include.
+
+diff --git a/app/views/layouts/application.html.erb b/app/views/layouts/application.html.erb
+index 3bb32a5..ed64b1e 100644
+--- a/app/views/layouts/application.html.erb
++++ b/app/views/layouts/application.html.erb
+@@ -4,7 +4,7 @@
+     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+     <title>Opscode - Account Management</title>
+     <%= stylesheet_link_tag "application" %>
+-    <%= javascript_include_tag "application" %>
++    <%= javascript_include_tag "modernizr" %>
+     <%= csrf_meta_tags %>
+     <%= javascript_tag do %>
+       $.RAILS_ENV = "<%= Rails.env %>";
+@@ -32,5 +32,6 @@
+         <%= render "shared/footer" %>
+       </div>
+     </div>
++    <%= javascript_include_tag "application" %>
+   </body>
+ </html>
+
+commit c663cf418bcabf67e9e9746bac6e8c80914ef321
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 28 16:05:27 2011 -0800
+
+    Fix indentation.
+    
+    Why oh why can't git be smarter about this?
+
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index ce4eacc..62bf020 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -1,80 +1,80 @@
+ <% if subscription %>
+-<div class="billing-block">
+-  <div class="billingInfo">
+-    <div class="currentInvoice">
+-      <div class="invoiceTitle">
+-        <div class="orgInfo"><h1>Current Invoice </h1></div>
+-        <% if !current_invoice.is_settled %>
+-          <div class="payBill">
+-            <a href="<%= account_organization_billing_invoice_path( :organization_id => organization["name"], :id => current_invoice.id ) %>" class="button invoice_fancybox">View</a>
+-            <% if current_plan_name( organization["billing_plan"] ) != "Free" %>
+-              <a href="<%= pay_bill_account_organization_billing_path(organization["name"]) %>" class="button">Pay Bill</a>
+-            <% end %>
++  <div class="billing-block">
++    <div class="billingInfo">
++      <div class="currentInvoice">
++        <div class="invoiceTitle">
++          <div class="orgInfo"><h1>Current Invoice </h1></div>
++          <% if !current_invoice.is_settled %>
++            <div class="payBill">
++              <a href="<%= account_organization_billing_invoice_path( :organization_id => organization["name"], :id => current_invoice.id ) %>" class="button invoice_fancybox">View</a>
++              <% if current_plan_name( organization["billing_plan"] ) != "Free" %>
++                <a href="<%= pay_bill_account_organization_billing_path(organization["name"]) %>" class="button">Pay Bill</a>
++              <% end %>
++            </div>
++          <% end %>
++        </div>
++        <% if current_invoice.is_settled %>
++          <div>
++            <span>
++              You are up to date and your next billing will be generated on
++              <%= format_invoice_date(subscription.current_period_ends_at) %>.
++            </span>
+           </div>
+-        <% end %>
++        <% else %>
++          <h4>Invoice No: <%= current_invoice.id %></h4>
++          <div class="orgInfo">
++            <span>Product: <%= subscription.product.name.split("-").first %></span>
++            <span>Current Plan: <%= current_plan_name(organization["billing_plan"]) %></span>
++          </div>
++          <div class="currentInvoice1">
++            <span>Amount: <%= currency_format( subscription.balance_in_cents ) %></span>
++            <span>Bill Date: <%= format_invoice_date(current_invoice.opened_date) %> - <%= format_invoice_date(current_invoice.closed_date) %></span>
++          </div>
++        <% end %>              
+       </div>
+-      <% if current_invoice.is_settled %>
++    </div>
++    <div class="billingInfo">
++      <div class="orgInfo">
++        <h1>Contact Information</h1>
++        <%= organization_contact_info %>
+         <div>
+-          <span>
+-            You are up to date and your next billing will be generated on
+-            <%= format_invoice_date(subscription.current_period_ends_at) %>.
+-          </span>
+-        </div>
+-      <% else %>
+-        <h4>Invoice No: <%= current_invoice.id %></h4>
+-        <div class="orgInfo">
+-          <span>Product: <%= subscription.product.name.split("-").first %></span>
+-          <span>Current Plan: <%= current_plan_name(organization["billing_plan"]) %></span>
++          <a class="button invoice_fancybox" href="#popup">Edit</a>
+         </div>
+-        <div class="currentInvoice1">
+-          <span>Amount: <%= currency_format( subscription.balance_in_cents ) %></span>
+-          <span>Bill Date: <%= format_invoice_date(current_invoice.opened_date) %> - <%= format_invoice_date(current_invoice.closed_date) %></span>
+-        </div>
+-      <% end %>              
+-    </div>
+-  </div>
+-  <div class="billingInfo">
+-    <div class="orgInfo">
+-      <h1>Contact Information</h1>
+-      <%= organization_contact_info %>
+-      <div>
+-        <a class="button invoice_fancybox" href="#popup">Edit</a>
+       </div>
+-    </div>
+-    <%= render "update_billing_contact", :customer => @organization.subscription.customer %>
+-    <div class="billingInfo1">
+-      <h1>Billing Information</h1>
+-      <% if subscription.credit_card %>
+-        <span><%= "#{subscription.credit_card.first_name} #{subscription.credit_card.last_name}" %></span>
+-        <span><%= subscription.credit_card.billing_address %></span>
+-        <span><%= subscription.credit_card.billing_address_2 %></span>
+-        <span>
+-          <%= subscription.credit_card.billing_state %>
+-          <% if subscription.credit_card.billing_zip.present? %>
+-            - <%= subscription.credit_card.billing_zip %>
++      <%= render "update_billing_contact", :customer => @organization.subscription.customer %>
++      <div class="billingInfo1">
++        <h1>Billing Information</h1>
++        <% if subscription.credit_card %>
++          <span><%= "#{subscription.credit_card.first_name} #{subscription.credit_card.last_name}" %></span>
++          <span><%= subscription.credit_card.billing_address %></span>
++          <span><%= subscription.credit_card.billing_address_2 %></span>
++          <span>
++            <%= subscription.credit_card.billing_state %>
++            <% if subscription.credit_card.billing_zip.present? %>
++              - <%= subscription.credit_card.billing_zip %>
++            <% end %>
++            , <%= subscription.credit_card.billing_country %>
++          </span>
++          <% if subscription.customer.email.present? %>
++          <span>Email: <%= subscription.customer.email %></span>
+           <% end %>
+-          , <%= subscription.credit_card.billing_country %>
+-        </span>
+-        <% if subscription.customer.email.present? %>
+-        <span>Email: <%= subscription.customer.email %></span>
+-        <% end %>
+-        <% if subscription.customer.phone.present? %>
+-        <span>Phone: <%= subscription.customer.phone %></span>
++          <% if subscription.customer.phone.present? %>
++          <span>Phone: <%= subscription.customer.phone %></span>
++          <% end %>
++          <span>Credit Card: <%= subscription.credit_card.masked_card_number rescue nil %></span>
++          <div>
++            <%= link_to "Edit", generate_chargify_url(subscription.id), :class => "button edit_customer_profile",
++                  "data-success-url" => account_organization_plan_path(organization["name"]) %>
++          </div>
++        <% else %>
++          <div>
++            <%= link_to "Edit", generate_chargify_url(subscription.id), :class => "button edit_customer_profile",
++                  "data-success-url" => account_organization_plan_path(organization["name"]) %>
++          </div>
+         <% end %>
+-        <span>Credit Card: <%= subscription.credit_card.masked_card_number rescue nil %></span>
+-        <div>
+-          <%= link_to "Edit", generate_chargify_url(subscription.id), :class => "button edit_customer_profile",
+-                "data-success-url" => account_organization_plan_path(organization["name"]) %>
+-        </div>
+-      <% else %>
+-        <div>
+-          <%= link_to "Edit", generate_chargify_url(subscription.id), :class => "button edit_customer_profile",
+-                "data-success-url" => account_organization_plan_path(organization["name"]) %>
+-        </div>
+-      <% end %>
++      </div>
+     </div>
+   </div>
+-</div>
+   <%= render "billing_history", {:invoices => invoices, :subscription => subscription, :organization => organization} %>
+ <% else %>
+   <%= render "chargify_call_us" %>
+
+commit fd06f8af3a7c6f9320624cee675764266e0bf068
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 28 16:05:01 2011 -0800
+
+    Minor style tweaks for billing info.
+
+diff --git a/app/assets/stylesheets/_account.scss b/app/assets/stylesheets/_account.scss
+index a772b86..27ea0af 100644
+--- a/app/assets/stylesheets/_account.scss
++++ b/app/assets/stylesheets/_account.scss
+@@ -331,6 +331,8 @@ h2.accounthead {
+ 
+ .billinghistorytable {
+   margin: 20px 0px 0px 0px;
++  padding: 10px 0;
++  clear: both; // Just in case it something goes funky with the sidebar
+   table {
+     width: 94%;
+     border-collapse: collapse;
+@@ -794,7 +796,6 @@ form.standard .formError {
+ a#fancybox-close:hover {
+   background-position: 0px 0px; }
+ 
+-<<<<<<< HEAD
+ .linkedIn {
+   padding-bottom: 40px;
+   a {
+@@ -822,8 +823,7 @@ body.plans, body.billings {
+     overflow: hidden; // Force new BFC
+   }
+ }
+-=======
++
+ #edit_billing_info_form input[type=submit] {
+   cursor: pointer;
+   padding: 0 22px 0 10px; }
+->>>>>>> e9c09dd... Implemented Organization Contact Information(view & update)
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index 40a80d1..ce4eacc 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -1,5 +1,6 @@
+ <% if subscription %>
+-  <div class="billingInfo billing-block">
++<div class="billing-block">
++  <div class="billingInfo">
+     <div class="currentInvoice">
+       <div class="invoiceTitle">
+         <div class="orgInfo"><h1>Current Invoice </h1></div>
+@@ -34,7 +35,7 @@
+   </div>
+   <div class="billingInfo">
+     <div class="orgInfo">
+-      <h1>Organization Contact Information</h1>
++      <h1>Contact Information</h1>
+       <%= organization_contact_info %>
+       <div>
+         <a class="button invoice_fancybox" href="#popup">Edit</a>
+@@ -44,7 +45,6 @@
+     <div class="billingInfo1">
+       <h1>Billing Information</h1>
+       <% if subscription.credit_card %>
+-        <span class="key-step">Address:</span>
+         <span><%= "#{subscription.credit_card.first_name} #{subscription.credit_card.last_name}" %></span>
+         <span><%= subscription.credit_card.billing_address %></span>
+         <span><%= subscription.credit_card.billing_address_2 %></span>
+@@ -74,6 +74,7 @@
+       <% end %>
+     </div>
+   </div>
++</div>
+   <%= render "billing_history", {:invoices => invoices, :subscription => subscription, :organization => organization} %>
+ <% else %>
+   <%= render "chargify_call_us" %>
+
+commit 5b17099a2453138ee45a64929a5bb06805d0c1e8
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 28 15:13:23 2011 -0800
+
+    Switch two more pages to CSS corners.
+
+diff --git a/app/views/billings/_billing_history.html.erb b/app/views/billings/_billing_history.html.erb
+index b184d6e..7cbf834 100644
+--- a/app/views/billings/_billing_history.html.erb
++++ b/app/views/billings/_billing_history.html.erb
+@@ -1,45 +1,25 @@
+ <h2>Billing History</h2>
+-<div class="whiteroundedcorner billinghistorytable">
+-  <div class="topleft">
+-    <div class="topcenter">
+-      <div class="topright">
+-        &nbsp;
+-      </div>
+-    </div>
+-  </div>
+-  <div class="centerbg">
+-    <div class="centercenter">
+-      <div class="centerright">        
+-        <table>
+-          <tr>
+-            <th style="width:15%">Bill Date</th>
+-            <th style="width:15%">Invoice No</th>
+-            <th style="width:15%">Product</th>
+-            <th style="width:15%">Plan</th>
+-            <th style="width:10%">Amount</th>
+-            <th style="width:15%">Status</th>
+-            <th style="width:15%">Action</th>
+-          </tr>
+-          <% invoices.each do |invoice| %>
+-            <tr>
+-              <td><%= format_invoice_date(invoice.closed_date) %></td>
+-              <td><%= invoice.id %></td>
+-              <td><%= subscription.product.name.split("-").first %></td>
+-              <td><%= statement_plan_name( invoice.transactions, subscription.product.product_family.name ) %></td>
+-              <td class="amount"><%= currency_format( statement_total_amount( invoice.transactions ) ) %></td>
+-              <td><%= invoice.status %></td>
+-              <td><a href="<%= account_organization_billing_invoice_path( :organization_id => organization["name"], :id => invoice.id ) %>" class="invoice_fancybox">View Details</a></td>
+-            </tr>
+-          <% end %>
+-        </table>        
+-      </div>
+-    </div>
+-  </div>
+-  <div class="bottomleft">
+-    <div class="bottomcenter">
+-      <div class="bottomright">
+-        &nbsp;
+-      </div>
+-    </div>
+-  </div>
++<div class="billinghistorytable billing-block">
++  <table>
++    <tr>
++      <th style="width:15%">Bill Date</th>
++      <th style="width:15%">Invoice No</th>
++      <th style="width:15%">Product</th>
++      <th style="width:15%">Plan</th>
++      <th style="width:10%">Amount</th>
++      <th style="width:15%">Status</th>
++      <th style="width:15%">Action</th>
++    </tr>
++    <% invoices.each do |invoice| %>
++      <tr>
++        <td><%= format_invoice_date(invoice.closed_date) %></td>
++        <td><%= invoice.id %></td>
++        <td><%= subscription.product.name.split("-").first %></td>
++        <td><%= statement_plan_name( invoice.transactions, subscription.product.product_family.name ) %></td>
++        <td class="amount"><%= currency_format( statement_total_amount( invoice.transactions ) ) %></td>
++        <td><%= invoice.status %></td>
++        <td><a href="<%= account_organization_billing_invoice_path( :organization_id => organization["name"], :id => invoice.id ) %>" class="invoice_fancybox">View Details</a></td>
++      </tr>
++    <% end %>
++  </table>
+ </div>
+diff --git a/app/views/billings/_billing_information.html.erb b/app/views/billings/_billing_information.html.erb
+index 9369214..1c5bc54 100644
+--- a/app/views/billings/_billing_information.html.erb
++++ b/app/views/billings/_billing_information.html.erb
+@@ -1,73 +1,51 @@
+ <% if subscription and subscription.is_creditcard_payment %>
+-  <div class="whiteroundedcorner">
+-    <div class="topleft">
+-      <div class="topcenter">
+-        <div class="topright">
+-          &nbsp;
++  <div class="billingInfo billing-block">
++    <div class="currentInvoice">
++      <h1>Current Invoice</h1>
++      <% if current_invoice.is_settled %>
++        <div>
++          <span>
++            You are up to date and your next billing will be generated on
++            <%= format_invoice_date(subscription.current_period_ends_at) %>.
++          </span>
+         </div>
+-      </div>
+-    </div>
+-    <div class="centerbg">
+-      <div class="centercenter">
+-        <div class="centerright">
+-          <div class="billingInfo">
+-            <div class="currentInvoice">
+-              <h1>Current Invoice</h1>
+-              <% if current_invoice.is_settled %>
+-                <div>
+-                  <span>
+-                    You are up to date and your next billing will be generated on
+-                    <%= format_invoice_date(subscription.current_period_ends_at) %>.
+-                  </span>
+-                </div>
+-              <% else %>
+-                <h4>Invoice No: <%= current_invoice.id %></h4>
+-                <div>
+-                  <span>Product: <%= subscription.product.name.split("-").first %></span>
+-                  <span>Current Plan: <%= current_plan_name(organization["billing_plan"]) %></span>
+-                  <span>Amount: <%= currency_format( subscription.balance_in_cents ) %></span>
+-                  <span>Bill Date: <%= format_invoice_date(current_invoice.opened_date) %> - <%= format_invoice_date(current_invoice.closed_date) %></span>
+-                </div>
+-                <p><a href="<%= account_organization_billing_invoice_path( :organization_id => organization["name"], :id => current_invoice.id ) %>" class="button invoice_fancybox">View</a>
+-                <% if current_plan_name( organization["billing_plan"] ) != "Free" %>
+-                  <a href="<%= pay_bill_account_organization_billing_path(organization["name"]) %>" class="button">Pay Bill</a></p>
+-                <% end %>
+-              <% end %>              
+-            </div>
+-            <div class="contactInfo">
+-              <h1>Contact Information</h1>
+-              <span class="key-step">Address:</span>
+-              <span><%= "#{subscription.credit_card.first_name} #{subscription.credit_card.last_name}" %></span>
+-              <span><%= subscription.credit_card.billing_address %></span>
+-              <span><%= subscription.credit_card.billing_address_2 %></span>
+-              <span>
+-                <%= subscription.credit_card.billing_state %>
+-                <% if subscription.credit_card.billing_zip.present? %>
+-                  - <%= subscription.credit_card.billing_zip %>
+-                <% end %>
+-                , <%= subscription.credit_card.billing_country %>
+-              </span>
+-              <% if subscription.customer.email.present? %>
+-              <span>Email: <%= subscription.customer.email %></span>
+-              <% end %>
+-              <% if subscription.customer.phone.present? %>
+-              <span>Phone: <%= subscription.customer.phone %></span>
+-              <% end %>
+-              <span>Credit Card: <%= subscription.credit_card.masked_card_number rescue nil %></span>
+-              <div>
+-                <%= link_to "Edit", generate_chargify_url(subscription.id), :class => "button edit_customer_profile",
+-                      "data-success-url" => account_organization_plan_path(organization["name"]) %>
+-              </div>
+-            </div>
+-          </div>
++      <% else %>
++        <h4>Invoice No: <%= current_invoice.id %></h4>
++        <div>
++          <span>Product: <%= subscription.product.name.split("-").first %></span>
++          <span>Current Plan: <%= current_plan_name(organization["billing_plan"]) %></span>
++          <span>Amount: <%= currency_format( subscription.balance_in_cents ) %></span>
++          <span>Bill Date: <%= format_invoice_date(current_invoice.opened_date) %> - <%= format_invoice_date(current_invoice.closed_date) %></span>
+         </div>
+-      </div>
++        <p><a href="<%= account_organization_billing_invoice_path( :organization_id => organization["name"], :id => current_invoice.id ) %>" class="button invoice_fancybox">View</a>
++        <% if current_plan_name( organization["billing_plan"] ) != "Free" %>
++          <a href="<%= pay_bill_account_organization_billing_path(organization["name"]) %>" class="button">Pay Bill</a></p>
++        <% end %>
++      <% end %>              
+     </div>
+-    <div class="bottomleft">
+-      <div class="bottomcenter">
+-        <div class="bottomright">
+-          &nbsp;
+-        </div>
++    <div class="contactInfo">
++      <h1>Contact Information</h1>
++      <span class="key-step">Address:</span>
++      <span><%= "#{subscription.credit_card.first_name} #{subscription.credit_card.last_name}" %></span>
++      <span><%= subscription.credit_card.billing_address %></span>
++      <span><%= subscription.credit_card.billing_address_2 %></span>
++      <span>
++        <%= subscription.credit_card.billing_state %>
++        <% if subscription.credit_card.billing_zip.present? %>
++          - <%= subscription.credit_card.billing_zip %>
++        <% end %>
++        , <%= subscription.credit_card.billing_country %>
++      </span>
++      <% if subscription.customer.email.present? %>
++      <span>Email: <%= subscription.customer.email %></span>
++      <% end %>
++      <% if subscription.customer.phone.present? %>
++      <span>Phone: <%= subscription.customer.phone %></span>
++      <% end %>
++      <span>Credit Card: <%= subscription.credit_card.masked_card_number rescue nil %></span>
++      <div>
++        <%= link_to "Edit", generate_chargify_url(subscription.id), :class => "button edit_customer_profile",
++              "data-success-url" => account_organization_plan_path(organization["name"]) %>
+       </div>
+     </div>
+   </div>
+
+commit dbe2d52dc6a6ca00b764de71fe8bc5b29b3a63df
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 28 14:17:53 2011 -0800
+
+    Bump again.
+
+diff --git a/Gemfile.lock b/Gemfile.lock
+index aeae8a8..6aca4cf 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -28,7 +28,7 @@ GIT
+ 
+ GIT
+   remote: git@github.com:opscode/opscode-chrome.git
+-  revision: 4d6954007dca68c6021e02ccf3331880a9985bf4
++  revision: 68d9324dea0b8199fe850548de80392ad3dfa7f6
+   specs:
+     opscode-chrome (0.1)
+       compass (>= 0.12.alpha.0)
+
+commit e6b6c0460ede5823934043d27ecb4c1eba093a15
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 28 14:08:06 2011 -0800
+
+    Bump opscode chrome.
+
+diff --git a/Gemfile.lock b/Gemfile.lock
+index 27d514f..aeae8a8 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -28,7 +28,7 @@ GIT
+ 
+ GIT
+   remote: git@github.com:opscode/opscode-chrome.git
+-  revision: e8d16e7aa761d4842b351a7ff1dbbeb23a7e2940
++  revision: 4d6954007dca68c6021e02ccf3331880a9985bf4
+   specs:
+     opscode-chrome (0.1)
+       compass (>= 0.12.alpha.0)
+
+commit 0eeb2f39eac31d8e88614c784668954ee91573d5
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 28 01:00:53 2011 -0800
+
+    Reskin another page.
+
+diff --git a/app/views/billings/_chargify_call_us.html.erb b/app/views/billings/_chargify_call_us.html.erb
+index 7e910ce..d958e12 100644
+--- a/app/views/billings/_chargify_call_us.html.erb
++++ b/app/views/billings/_chargify_call_us.html.erb
+@@ -1,25 +1,3 @@
+-<div class="whiteroundedcorner">
+-  <div class="topleft">
+-    <div class="topcenter">
+-      <div class="topright">
+-        &nbsp;
+-      </div>
+-    </div>
+-  </div>
+-  <div class="centerbg">
+-    <div class="centercenter">
+-      <div class="centerright">        
+-        <div class="callus">
+-          <p>To learn details of your current invoice, billing contact info, and billing history, please call us at 206-508-4799.</p>
+-        </div>        
+-      </div>
+-    </div>
+-  </div>
+-  <div class="bottomleft">
+-    <div class="bottomcenter">
+-      <div class="bottomright">
+-        &nbsp;
+-      </div>
+-    </div>
+-  </div>
++<div class="callus billing-block">
++  <p>To learn details of your current invoice, billing contact info, and billing history, please call us at 206-508-4799.</p>
+ </div>
+
+commit 029f8cfb6b877612aab25df04d313229b059625b
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 28 00:53:06 2011 -0800
+
+    Reskin plans page.
+
+diff --git a/app/assets/stylesheets/_account.scss b/app/assets/stylesheets/_account.scss
+index b3de272..2050792 100644
+--- a/app/assets/stylesheets/_account.scss
++++ b/app/assets/stylesheets/_account.scss
+@@ -431,7 +431,8 @@ h2.accounthead {
+   width: 150px; }
+ 
+ .viewEditPlan {
+-  padding: 0px 20px;
++  padding: 10px 20px;
++  margin-bottom: 16px;
+   .currentPlanholder {
+     @include clearfix; }
+   h2 {
+@@ -477,12 +478,12 @@ h2.accounthead {
+ }
+ 
+ #plansPricing {
+-  padding: 0 20px;
++  padding: 10px 20px;
+   h2 {
+     color: #333333;
+     font: 30px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif;
+     margin: 0px 0px 12px 0px;
+-    padding-top: 10px; }
++    padding-top: 0; }
+   table, > div {
+     border-top: 1px solid #CFCFCF; }
+   table {
+@@ -775,6 +776,5 @@ body.sessions {
+ body.plans, body.billings {
+   .billing-block {
+     overflow: hidden; // Force new BFC
+-    @include opscode-block-base(#FFF, $opscode-colors-heading);
+   }
+ }
+diff --git a/app/assets/stylesheets/application.css.scss b/app/assets/stylesheets/application.css.scss
+index 419f0f0..57ffe4b 100644
+--- a/app/assets/stylesheets/application.css.scss
++++ b/app/assets/stylesheets/application.css.scss
+@@ -3,4 +3,17 @@
+ 
+ @include opscode-chrome;
+ 
++.billing-block {
++  @include opscode-white-block-base;
++}
++
+ @import "account";
++
++body.plans {
++  &.show {
++    .main-content {
++      // Force BFC
++      overflow: hidden;
++    }
++  }
++}
+diff --git a/app/views/plans/_current_plan.html.erb b/app/views/plans/_current_plan.html.erb
+index a602221..f222c05 100644
+--- a/app/views/plans/_current_plan.html.erb
++++ b/app/views/plans/_current_plan.html.erb
+@@ -1,56 +1,34 @@
+-<div class="whiteroundedcorner">
+-  <div class="topleft">
+-    <div class="topcenter">
+-      <div class="topright">&nbsp;</div>
++<div class="viewEditPlan billing-block">
++  <h2>Current Plan</h2>
++  <div class="currentPlanholder">
++    <div class="currentPlanPre">
++      <h4><%= current_plan[:display_name] %> $<%= current_plan[:price] %>/Month</h4>
++      <p>
++        <span>Subscribed on: <%= format_invoice_date(subscription.current_period_started_at) %></span>
++      </p>
+     </div>
+-  </div>
+-  <div class="centerbg">
+-    <div class="centercenter">
+-      <div class="centerright">
+-        <div class="centerRightContent">
+-          <div class="viewEditPlan">
+-            <h2>Current Plan</h2>
+-            <div class="currentPlanholder">
+-              <div class="currentPlanPre">
+-                <h4><%= current_plan[:display_name] %> $<%= current_plan[:price] %>/Month</h4>
+-                <p>
+-                  <span>Subscribed on: <%= format_invoice_date(subscription.current_period_started_at) %></span>
+-                </p>
+-              </div>
+-              <div class="currentPlanNode">
+-                <h4>Nodes</h4>
+-                <p>
+-                  <span>Total: <%= current_plan[:nodes] %></span>
+-                  <span>Used: <%= nodes_used %></span>
+-                  <span>Available: <%= nodes_available( current_plan[:nodes] ) %></span>
+-               </p>
+-              </div>
+-            </div>
+-            <% if !is_free_plan?(current_plan) %>
+-              <div class="currentPlanStatus">
+-                <p>
+-                  <span class="key-step">Current Plan Status:</span>
+-                  <%= payment_status.html_safe %>
+-                </p>
+-                <div class="cancelbtn">
+-               	<%= 
+-		link_to_if(subscription.cancel_at_end_of_period?, "Cancel", "#popup", :class => "button-right-arrow disabled invoice_fancybox" ) do
+-                  link_to "Cancel", "#popup", :class => "button-right-arrow invoice_fancybox"
+-		end
+-		%>
+-                </div>
+-              </div>
+-            <% end %>
+-          </div>
+-        </div>
+-      </div>
++    <div class="currentPlanNode">
++      <h4>Nodes</h4>
++      <p>
++        <span>Total: <%= current_plan[:nodes] %></span>
++        <span>Used: <%= nodes_used %></span>
++        <span>Available: <%= nodes_available( current_plan[:nodes] ) %></span>
++     </p>
+     </div>
+   </div>
+-  <div class="bottomleft">
+-      <div class="bottomcenter">
+-          <div class="bottomright">
+-              &nbsp;
+-          </div>
++  <% if !is_free_plan?(current_plan) %>
++    <div class="currentPlanStatus">
++      <p>
++        <span class="key-step">Current Plan Status:</span>
++        <%= payment_status.html_safe %>
++      </p>
++      <div class="cancelbtn">
++     	<%= 
++link_to_if(subscription.cancel_at_end_of_period?, "Cancel", "#popup", :class => "button-right-arrow disabled invoice_fancybox" ) do
++        link_to "Cancel", "#popup", :class => "button-right-arrow invoice_fancybox"
++end
++%>
+       </div>
+-  </div>
++    </div>
++  <% end %>
+ </div>
+diff --git a/app/views/plans/_plans_and_pricing.html.erb b/app/views/plans/_plans_and_pricing.html.erb
+index cde1855..90f3c49 100644
+--- a/app/views/plans/_plans_and_pricing.html.erb
++++ b/app/views/plans/_plans_and_pricing.html.erb
+@@ -1,122 +1,100 @@
+-<div class="whiteroundedcorner">
+-  <div class="topleft">
+-    <div class="topcenter">
+-      <div class="topright">&nbsp;</div>
+-    </div>
+-  </div>
+-  <div class="centerbg">
+-    <div class="centercenter">
+-      <div class="centerright">
+-        <div class="centerRightContent">
+-          <div id="plansPricing">
+-            <h2>Plans &amp; Pricing</h2>
+-            <table>
+-              <tbody>
+-                <tr class="heading">
+-                  <th>
+-                      &nbsp;
+-                  </th>
+-                  <% active_plans.each do |plan| %>
+-                    <%if plan[:api_key] != current_plan[:api_key] %>
+-                      <th><%= plan[:display_name]%></th>
+-                    <% else %>
+-                      <th class="unavailable"><%= plan[:display_name]%></th>
+-                    <% end %>
+-                  <% end %>
+-                </tr>
+-                <tr class="fees">
+-                  <th>
+-                      Monthly Fees
+-                  </th>
+-                  <% active_plans.each do |plan| %>
+-                    <%if plan[:api_key] == "platform-free" %>
+-                      <td rowspan="5" class="<%= plan_css_status(plan, current_plan) %>">
+-                        Hosted Chef is
+-                        <br />
+-                        free for
+-                        <br />
+-                        <%= plan[:nodes] %> nodes or less!
+-                      </td>
+-                    <% else %>
+-                      <td class="<%= plan_css_status(plan, current_plan) %>">
+-                        $<%= plan[:price]%>
+-                      </td>
+-                    <% end %>
+-                  <% end %>
+-                </tr>
+-                <tr class="nodes">
+-                  <td>
+-                    Nodes
+-                  </td>
+-                  <% billing_plans.each do |plan| %>
+-                    <td class="<%= plan_css_status(plan, current_plan) %>"><%= plan[:nodes]%></td>
+-                  <% end %>
+-                </tr>
+-                <tr class="users">
+-                  <td>
+-                    Users
+-                  </td>
+-                  <% billing_plans.each do |plan| %>
+-                    <td class="<%= plan_css_status(plan, current_plan) %>"><%= plan[:users] %></td> 
+-                  <% end %>
+-                </tr>
+-                <tr class="support">
+-                  <td>
+-                    Standard Support
+-                  </td>
+-                  <% billing_plans.each do |plan| %> 
+-                    <td class="<%= plan_css_status(plan, current_plan) %>">Included</td>
+-                  <% end %>
+-                </tr>
+-                <tr class="training">
+-                  <td>
+-                    Onsite Training
+-                  </td>
+-                  <% billing_plans.each do |plan| %>
+-                    <td class="<%= plan_css_status(plan, current_plan) %>">
+-                      <% if plan[:api_key] == "platform-0411-premium" %>
+-                        Available
+-                      <% else %>
+-                        Not available
+-                      <% end %>
+-                    </td>
+-                  <% end %>
+-                </tr>
+-                <tr class="buy-now">
+-                  <td>
+-                    &nbsp;
+-                  </td>
+-                  <% active_plans.each do |plan| %>
+-                    <% if plan[:api_key] == current_plan[:api_key] %>
+-                      <td>
+-                        <%= link_to "Select", "javascript:;", :class=>plan_select_css(plan, current_plan) %>
+-                      </td>
+-                    <% else %>
+-                      <td>
+-                        <%= link_to "Select", plan_select_path(plan, current_plan), :remote=>true, :method=> :put,
+-                        :class=>plan_select_css(plan, current_plan) %>
+-                      </td>
+-                    <% end %>
+-                  <% end %>
+-                </tr>
+-              </tbody>
+-            </table>
+-            <div class="enterprise">
+-              <h6>
+-                <%= link_to "Need more nodes? Contact us about Hosted Chef for the Enterprise", "http://www.opscode.com/hosted-chef/contact-sales/", :class=>                "hoverLink"%>
+-              </h6>
+-              <p>Questions about Hosted Chef pricing and support? Check the <a href="http://www.opscode.com/hosted-chef/faq/">FAQ</a>.</p>
+-            </div>
+-          </div>
+-        </div>
+-      </div>
+-    </div>
+-  </div>
+-  <div class="bottomleft">
+-    <div class="bottomcenter">
+-      <div class="bottomright">
+-        &nbsp;
+-      </div>
+-    </div>
++<div id="plansPricing" class="billing-block">
++  <h2>Plans &amp; Pricing</h2>
++  <table>
++    <tbody>
++      <tr class="heading">
++        <th>
++            &nbsp;
++        </th>
++        <% active_plans.each do |plan| %>
++          <%if plan[:api_key] != current_plan[:api_key] %>
++            <th><%= plan[:display_name]%></th>
++          <% else %>
++            <th class="unavailable"><%= plan[:display_name]%></th>
++          <% end %>
++        <% end %>
++      </tr>
++      <tr class="fees">
++        <th>
++            Monthly Fees
++        </th>
++        <% active_plans.each do |plan| %>
++          <%if plan[:api_key] == "platform-free" %>
++            <td rowspan="5" class="<%= plan_css_status(plan, current_plan) %>">
++              Hosted Chef is
++              <br />
++              free for
++              <br />
++              <%= plan[:nodes] %> nodes or less!
++            </td>
++          <% else %>
++            <td class="<%= plan_css_status(plan, current_plan) %>">
++              $<%= plan[:price]%>
++            </td>
++          <% end %>
++        <% end %>
++      </tr>
++      <tr class="nodes">
++        <td>
++          Nodes
++        </td>
++        <% billing_plans.each do |plan| %>
++          <td class="<%= plan_css_status(plan, current_plan) %>"><%= plan[:nodes]%></td>
++        <% end %>
++      </tr>
++      <tr class="users">
++        <td>
++          Users
++        </td>
++        <% billing_plans.each do |plan| %>
++          <td class="<%= plan_css_status(plan, current_plan) %>"><%= plan[:users] %></td> 
++        <% end %>
++      </tr>
++      <tr class="support">
++        <td>
++          Standard Support
++        </td>
++        <% billing_plans.each do |plan| %> 
++          <td class="<%= plan_css_status(plan, current_plan) %>">Included</td>
++        <% end %>
++      </tr>
++      <tr class="training">
++        <td>
++          Onsite Training
++        </td>
++        <% billing_plans.each do |plan| %>
++          <td class="<%= plan_css_status(plan, current_plan) %>">
++            <% if plan[:api_key] == "platform-0411-premium" %>
++              Available
++            <% else %>
++              Not available
++            <% end %>
++          </td>
++        <% end %>
++      </tr>
++      <tr class="buy-now">
++        <td>
++          &nbsp;
++        </td>
++        <% active_plans.each do |plan| %>
++          <% if plan[:api_key] == current_plan[:api_key] %>
++            <td>
++              <%= link_to "Select", "javascript:;", :class=>plan_select_css(plan, current_plan) %>
++            </td>
++          <% else %>
++            <td>
++              <%= link_to "Select", plan_select_path(plan, current_plan), :remote=>true, :method=> :put,
++              :class=>plan_select_css(plan, current_plan) %>
++            </td>
++          <% end %>
++        <% end %>
++      </tr>
++    </tbody>
++  </table>
++  <div class="enterprise">
++    <h6>
++      <%= link_to "Need more nodes? Contact us about Hosted Chef for the Enterprise", "http://www.opscode.com/hosted-chef/contact-sales/", :class=>                "hoverLink"%>
++    </h6>
++    <p>Questions about Hosted Chef pricing and support? Check the <a href="http://www.opscode.com/hosted-chef/faq/">FAQ</a>.</p>
+   </div>
+ </div>
+
+commit acf45b4d6c149b452213ca7b4460e709a3c9296e
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Tue Dec 27 17:40:36 2011 -0800
+
+    Move the flash so that it doesn't overlap the sidebar.
+
+diff --git a/app/views/layouts/application.html.erb b/app/views/layouts/application.html.erb
+index 48854bc..3bb32a5 100644
+--- a/app/views/layouts/application.html.erb
++++ b/app/views/layouts/application.html.erb
+@@ -22,9 +22,9 @@
+         <%= yield :navigation_menu %>
+       </div>
+       <div id="content">
++        <%= render "shared/flash_messages" %>
+         <%= yield :sidebar %>
+         <div class="main-content">
+-          <%= render "shared/flash_messages" %>
+           <%= yield %>
+         </div>
+       </div>
+
+commit a1352ebb22762fe72f965ad7a134c5fbadbc869f
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 22 14:09:10 2011 -0800
+
+    Fix pdf.css.scss to precompile correctly.
+
+diff --git a/app/assets/stylesheets/pdf.css.scss b/app/assets/stylesheets/pdf.css.scss
+index a792695..9b01f8a 100644
+--- a/app/assets/stylesheets/pdf.css.scss
++++ b/app/assets/stylesheets/pdf.css.scss
+@@ -1,3 +1,4 @@
++@import "opscode";
+ @import "account";
+ #invoicePopup {
+   width: 100%; 
+
+commit 1fa835f2f34bf47ab6ae9ef2f1557330ad5e18c8
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 22 14:07:16 2011 -0800
+
+    Rename account.css.scss into a Sass partial.
+    
+    Otherwise rake assets:precompile tries to build it independently, which isn't possible.
+
+diff --git a/app/assets/stylesheets/_account.scss b/app/assets/stylesheets/_account.scss
+new file mode 100644
+index 0000000..b3de272
+--- /dev/null
++++ b/app/assets/stylesheets/_account.scss
+@@ -0,0 +1,780 @@
++@import "compass/utilities/general/clearfix";
++@import "compass/css3/border-radius";
++
++h1, h2 {
++  font-weight: normal; }
++
++a img {
++  border: none;
++  vertical-align: middle; }
++
++/*Menu*/
++
++li#homesMenuItem {
++  a {
++    background: url("home_icon.png") no-repeat scroll 10px 0px transparent;
++    display: block;
++    height: 22px;
++    width: 18px;
++    &:hover {
++      background: url("home_hover_icon.png") no-repeat scroll 10px 0px transparent; } }
++  &.active a {
++    background: url("home_hover_icon.png") no-repeat scroll 10px 0px transparent; } }
++
++.menu ul li {
++  &.last, li {
++    background-image: none; } }
++
++#header .menu ul li .submenu {
++  left:0px; 
++  *margin-top: -10px; /* IE 7 Hack*/
++  ul {
++    position:relative;
++    z-index:101; } }
++
++#header .menu ul li {
++  ul li.toparrow {
++    background: url("upMenuArrow.png") no-repeat scroll 12% top transparent;
++    border: none;
++    height: 10px;
++    margin-bottom: -1px;
++    *margin-bottom: -2px; /* IE 7 Hack*/
++    position: relative;
++    width: 150px;
++    z-index: 100;
++    &.arrowActive {
++      background-image: url(upMenuArrow_on.png); }
++    &:hover {
++      background: url("upMenuArrow.png") no-repeat scroll 12% top transparent;
++      border: none;
++      height: 10px;
++      margin-bottom: -1px;
++      *margin-bottom: -2px; /* IE 7 Hack*/
++      position: relative;
++      width: 150px;
++      z-index: 100; } }
++  &.callout {
++    a {
++      padding-left: 11px;
++      padding-right: 0px; }
++    background: url("productbgorange.png") no-repeat left top;
++    height: 43px;
++    width:120px;
++    padding-right: 0px; } }
++
++/*Sub Naviggation*/
++
++#subnav {
++  height: auto;
++  background: none;
++  position: static;
++  border: none; }
++
++#pageTitle {
++  background-color: #D7D4C3;
++  height: 70px;
++  padding: 20px 0 0 40px; }
++
++#productMenu {
++  margin-bottom: 10px;
++  ul {
++    overflow: hidden;
++    list-style: none;
++    padding: 0px 0px 0px 20px; }
++  li {
++    float: left;
++    padding: 0px 20px 0;
++    font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif;
++    a {
++      color: #85918C;
++      display: block;
++      padding: 20px 0px 0;
++      &.activePageMenuItem {
++        background: url(pageMenuItem_on.png) no-repeat top center;
++        color: #333; } } } }
++
++/*Account Management*/
++
++.key-step {
++  color: #333;
++  font-weight: bold; }
++
++.organizationHead{
++ @include clearfix; }
++
++// #content {
++//   .button:hover, .button-left-arrow:hover, .button-right-arrow, .big-button, .disabled {
++//     color: #fff; }
++//   p {
++//     margin: 0px;
++//     padding: 0 0 12px; }
++//   h1 {
++//     font-size: 26px; }
++//   h3 {
++//     font-weight: normal;
++//     font-size: 13px; } }
++
++/*left content*/
++
++/*form*/
++
++// form.standard {
++//   padding: 15px 0px;
++//   label {
++//     display: block;
++//     font: 16px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif;
++//     margin-bottom: 2px; }
++//   input[type=submit], input[type=button] {
++//     @extend .button-right-arrow; }
++//   fieldset {
++//     input {
++//       width: 276px; }
++//     padding-top: 5px;
++//     padding-bottom: 12px;
++//     display: block; }
++//   input {
++//     &.changepswd {
++//       margin: 12px 0 10px; }
++//     &[type="button"] {
++//       cursor: pointer; } } }
++
++/*fieldset*/
++
++/*change password input button*/
++
++h1.resetkey {
++  padding: 15px 0 10px; }
++
++#content {
++  @include clearfix;
++  .sidebar {
++    .greyroundedcorner.block a {
++      font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif;
++      padding: 5px 25px 6px 1px; }
++    .greyroundedcorner.block {
++      background: none;
++      border-radius: 0px;
++      border: none;
++      margin: 0;
++      padding: 0 0 8px; } } }
++
++/*Rounded corner with grey background*/
++
++.greyroundedcorner {
++  padding: 0 0 8px;
++  .topleft {
++    background: url("greybgtopcenter.jpg") repeat-x left top transparent; }
++  .topcenter {
++    background: url("greybgtopleft.jpg") no-repeat left top transparent; }
++  .topright {
++    background: url("gerybgtopright.jpg") no-repeat right top transparent;
++    height: 11px; }
++  .centerbg {
++    background: none repeat scroll 0 0 #D7D4C3;
++    min-height: 100px; }
++  .centerinner {
++    padding: 0 13px;
++    overflow: hidden; }
++  .bottomleft {
++    background: url("greybgbottomcenter.jpg") repeat-x left top transparent; }
++  .bottomcenter {
++    background: url("greybgbottomleft.jpg") no-repeat left top transparent; }
++  .bottomright {
++    background: url("gerybgbottomright.jpg") no-repeat right top transparent; } }
++
++.sidebar {
++  h2 {
++    color: #333;
++    font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif;
++    font-size: 23px;
++    margin: 0;
++    padding: 0 0 10px; }
++  a.big-button {
++    margin: 0 0 12px;
++    font-size: 116%;
++    background: #f7681a url(littlearrow_white.png) no-repeat right center;
++    background: url(littlearrow_white.png) no-repeat right center, -moz-linear-gradient(top, #ff8b4d, #f7681a);
++    background: url(littlearrow_white.png) no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#ff8b4d), to(#f7681a));
++    &:hover {
++      background: #333333 url(littlearrow_white.png) no-repeat right center;
++      background: url(littlearrow_white.png) no-repeat right center, -moz-linear-gradient(top, #737373, #333333);
++      background: url(littlearrow_white.png) no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#737373), to(#333333)); } } }
++
++/*Right side bar button with arrow icon*/
++
++/*my profile*/
++
++#content form.standard .mailInfo p {
++  color: #333;
++  font: 16px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif;
++  padding: 0px 0px 3px 0px;
++  margin: 0px; }
++
++form.standard {
++  .mailInfo p input {
++    margin: 0px 7px 0px 0px;
++    position: static; }
++  .myprofiletable {
++    table-layout: fixed;
++    fieldset {
++      width: 100%; }
++    input {
++      width: 87%;
++      padding: 8px;
++      &.emailaddress {
++        width: 93%; } }
++    select {
++      border: 1px solid #9A9787;
++      border-radius: 5px 5px 5px 5px;
++      padding: 8px;
++      width: 94%; } } }
++
++/*Information which appears on the top of the main content with yellow background*/
++
++.information {
++  background: #ffffcc;
++  padding: 8px;
++  border: 1px solid #ccc;
++  margin: 10px 30px 20px;
++  p.msgicon {
++    color: #6e6e4e;
++    background: url(msgicon.png) no-repeat 10px top;
++    padding: 0px 0px 0px 50px;
++    font-size: 12px;
++    height: 25px;
++    line-height: 25px; } }
++
++.profileinformation {
++  @include clearfix;
++  .profileimage {
++    float: left;
++    width: 20%; }
++  .profilemsg {
++    float: left;
++    padding: 0 0 12px;
++    width: 80%;
++    h1 {
++      font-size: 25px;
++      margin: 0px; }
++    p {
++      font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif; }
++    span {
++      display: block;
++      font-size: 13px;
++      color: #767676;
++      padding: 0 0 1px;
++      &.key-step {
++        font-weight: normal;
++        color: #000; } }
++    p {
++      color: #333; } } }
++
++.border {
++  height: 1px;
++  background: #eae9e9;
++  margin: 15px 0 20px; }
++
++form.standard .profileInfo {
++  overflow: hidden;
++  padding: 0 0 10px;
++  fieldset {
++    float: left;
++    width: 33%;
++    margin: 0px;
++    padding: 0px 0px 12px 0px;
++    &.lastFieldset {
++      margin-right: 0px; } }
++  input {
++    width: 87%;
++    padding: 8px; }
++  &.emailaddress {
++    width: 70%;
++    fieldset {
++      width: 100%; } }
++  select {
++    border: 1px solid #9A9787;
++    border-radius: 5px 5px 5px 5px;
++    padding: 8px;
++    width: 94%; } }
++
++/*Rounded corner with White background*/
++
++.whiteroundedcorner {
++  padding: 0 0 8px;
++  .topleft {
++    background: url("whitebgtopcenter.png") repeat-x left top transparent; }
++  .topcenter {
++    background: url("whitebgtopbg.png") no-repeat left top transparent; }
++  .topright {
++    background: url("whitebgtopright.png") no-repeat right top transparent;
++    height: 11px; }
++  .centerbg {
++    background: url("whitebgcenterleft.png") repeat-y left top;
++    padding-left: 3px; }
++  .centercenter {
++    background: #fff; }
++  .centerright {
++    background: url("whitebgcenterright.png") repeat-y right top;
++    min-height: 100px; }
++  .bottomleft {
++    background: url("whitebgbottomcenter.png") repeat-x left top transparent; }
++  .bottomcenter {
++    background: url("whitebgbottomleft.png") no-repeat left top transparent; }
++  .bottomright {
++    background: url("whitebgbottomright.png") no-repeat right top transparent; } }
++
++h2.accounthead {
++  margin: 0px;
++  padding: 0 0 0 40px; }
++
++/*Billing History*/
++
++.billinghistorytable {
++  margin: 20px 0px 0px 0px;
++  table {
++    width: 94%;
++    border-collapse: collapse;
++    margin: 0 auto; }
++  td, th {
++    font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif;
++    text-align: center; }
++  td {
++    padding: 4px 0px; }
++  th {
++    border-bottom: 1px solid #ccc;
++    padding: 7px 0px;
++    font-weight: normal;
++    font-size: 15px; }
++  tr.pending-status td, th {
++    color: #000; }
++  td.amount {
++    text-align: right; } }
++
++.amount {
++  text-align: right; }
++
++/*Billing Information*/
++
++.billingInfo {
++  @include clearfix;
++  padding: 10px 20px;
++  a {
++    padding: 8px 20px;
++    margin: 0px 20px 0px 0px; }
++  .currentInvoice {
++    float: left;
++    width: 40%; }
++  .contactInfo {
++    float: left;
++    width: 52%;
++    border-left: 1px solid #ccc;
++    margin: 0px 0px 0px 20px;
++    padding: 0px 0px 0px 20px; }
++  span {
++    color: #767676;
++    display: block;
++    font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif;
++    font-size: 14px; }
++  .contactInfo div {
++    text-align: right;
++    a {
++      position: relative;
++      bottom: 10px;
++      margin: 0px; } }
++  span.key-step {
++    font-weight: normal;
++    color: #000; }
++  h1 {
++    font-size: 24px;
++    padding: 0 0 12px; }
++  h4 {
++    padding: 0 0 4px;
++    font: 18px 'SquareSerifMedium',Arial,Helvetica,sans-serif; }
++  .centerright {
++    padding: 10px 0px 10px 0px; } }
++
++#content .currentInvoice p {
++  padding-top: 40px; }
++
++.callus {
++  min-height: 635px;
++  text-align: center; }
++
++#content .callus p {
++  font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif;
++  font-size: 21px;
++  padding: 240px 20px 40px; }
++
++/*View/Edit Plan*/
++
++.viewEditHead {
++  float: left;
++  h2.accounthead{
++    padding-top: 10px; }
++  h3{
++    color: #767676;
++    font-size: 20px;
++    font-weight: normal;
++    padding: 5px 0px 0px 40px;
++    margin: 0px;
++    span {
++      margin:0px 10px 0px 0px;  } } }
++
++.organizationHead select {
++  border: 1px solid #9A9787;
++  border-radius: 5px 5px 5px 5px;
++  -moz-border-radius: 5px;
++  -webkit-border-radius: 5px;
++  float: left;
++  margin: 15px 0px 0px 20px;
++  padding: 8px;
++  width: 150px; }
++
++.viewEditPlan {
++  padding: 0px 20px;
++  .currentPlanholder {
++    @include clearfix; }
++  h2 {
++    padding-top: 0px;
++    margin-bottom: 0px; }
++  h4, p, span, a {
++    font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif; }
++  .currentPlanPre {
++    border-left: medium none;
++    float:left;
++    padding-right:20px; }
++  .currentPlanNode {
++    padding-left: 20px;
++    padding-right: 20px;
++    float: left;
++    border-left: 1px solid #ccc;
++    p span {
++      padding-right: 10px; } }
++  div p {
++    padding: 0px; }
++  .clear {
++    clear: both;
++    float: none; }
++  p {
++    padding: 10px 0px 0px;
++    float: left; }
++  .currentPlanStatus {
++    @include clearfix; }
++  .cancelbtn {
++    float: right;
++    text-align: right;
++    border: none;
++    padding: 9px 9px 13px 0;
++    .button {
++      margin: 0px;
++      cursor: pointer;
++      padding: 4px 20px 4px 10px; } } }
++
++/*View/Edit Plan and Pricing*/
++
++#nonAdmin {
++  padding: 0 20px;
++}
++
++#plansPricing {
++  padding: 0 20px;
++  h2 {
++    color: #333333;
++    font: 30px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif;
++    margin: 0px 0px 12px 0px;
++    padding-top: 10px; }
++  table, > div {
++    border-top: 1px solid #CFCFCF; }
++  table {
++    border-collapse: collapse;
++    border-spacing: 0;
++    td, th {
++      border-left: 1px solid #CFCFCF;
++      font-size: 15px;
++      overflow: hidden;
++      padding: 8px 13px;
++      text-align: center;
++      vertical-align: middle; }
++    td:first-child, th:first-child {
++      border-left: none;
++      font-size: 13px;
++      font-style: italic;
++      font-weight: normal;
++      text-align: right; }
++    tr.heading th {
++      font: 25px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif; } }
++  td {
++    border-right: none;
++    &.unavailable {
++      color: #CCCCCC; } }
++  th.unavailable {
++    color: #CCCCCC; }
++  table tr {
++    &.fees .spannedRow {
++      font: 100% / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif; }
++    &.buy-now {
++      td, th {
++        border-color: #CFCFCF;
++        border-style: solid none none;
++        border-width: 1px 0 0;
++        padding: 15px; } } }
++  a {
++    &.button {
++      padding: 4px 22px 4px 10px; }
++    &.disabled {
++      padding: 4px 22px 4px 10px;
++      cursor: auto; } }
++  .enterprise p {
++    font-style: italic; } }
++
++/*Cancel Subscription*/
++
++#popup {
++  width: 710px;
++  background: #fff;
++  min-height: 300px;
++  padding: 20px; }
++
++#facebox .content {
++  padding: 0px; }
++
++#popup {
++  h1 {
++    margin: 0px; }
++  h2 {
++    font-size: 20px;
++    margin: 0 0 5px;
++    span {
++      color: #9E0E0E;
++      margin-left: 2px; } }
++  th, td {
++    border-bottom: 1px solid #ccc;
++    padding: 5px 5px;
++    text-align: center;
++    font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif; }
++  table {
++    border-collapse: collapse;
++    width: 100%;
++    margin: 10px 0 0; }
++  th {
++    font-weight: normal;
++    color: #000; }
++  ul {
++    background: #FFC5D1;
++    border: 1px solid #EB9DAD;
++    color: #333333;
++    font-size: 12px;
++    font-style: italic;
++    padding: 15px 0 20px 31px;
++    margin: 10px 0 15px;
++    li {
++      list-style: lower-alpha;
++      padding: 0 0 5px; } }
++  p {
++    text-align: center;
++    padding: 30px 0px 15px 0px;
++    a {
++      padding: 6px 25px; } }
++  form.standard {
++    padding: 0px; }
++  textarea {
++    border: 1px solid #ccc;
++    padding: 2px;
++    width: 98%;
++    overflow:auto;
++    height: 70px; } }
++
++/*Sucess and Error Message*/
++
++#flash {
++  font-weight: bold;
++  margin: auto auto 15px;
++  padding: 9px 15px;
++  text-align: center;
++  width:400px;
++  &.notice {
++    background:#FFCC00;
++    border: 1px solid #F0A200;
++    color: #000; } }
++
++/*Success Message*/
++
++form.standard .formError {
++  font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif; }
++
++#flash.error {
++  background-color: #990000;
++  border: 1px solid #000;
++  color: #ff0000; }
++
++/*invoice popup*/
++
++#invoicePopup {
++  background: #fff;
++  font-size: 13px;
++  width: 720px;
++  padding: 30px;
++  overflow: hidden;
++  span {
++    font-family: Helvetica, Arial, sans-serif; }
++  .invoiceHead {
++    border-bottom: 1px solid #CCCCCC;
++    @include clearfix;
++    padding: 0 0 5px; } }
++
++.invoiceHead {
++  h2 {
++    float: left;
++    width: 40%;
++    padding: 0;
++    margin: 0px;
++    font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif; }
++  .invoiceStatus {
++    float: left;
++    width: 33%;
++    h2 {
++      width: 100%;
++      text-align: center; } }
++  .invoiceButton {
++    text-align: right;
++    float: right;
++    padding: 12px 11px 10px 3px;
++    width: 23%;
++    a {
++      margin: 0px 0px 0px 8px;
++      padding: 5px 15px;
++      color:#fff; } } }
++
++.invoiceInformation {
++  border-bottom: 1px solid #ccc;
++  @include clearfix;
++  padding: 10px 0px 5px 0px;
++  p {
++    padding: 0px;
++    font-size: 13px; }
++  b {
++    color: #333; }
++  .companyLogo {
++    float: left;
++    width: 21%; }
++  .companyAddress {
++    float: left;
++    width: 54%; }
++  .invoiceAddress {
++    float: left;
++    width: 25%;
++    span { 
++      display: block;
++      word-wrap: break-word; } } }
++
++.invoiceAmount {
++  padding: 25px 0px;
++  @include clearfix;
++  .invoiceTotalAmount {
++    float: left;
++    width: 40%; } }
++
++.grandTotal {
++  @include clearfix; }
++
++.invoiceTotalAmount span {
++  display: block;
++  font-weight: bold;
++  font-size: 20px;
++  float: left;
++  margin: 10px 10px 0px 0px;
++  &.amount {
++    background: #ccc;
++    font-size: 24px;
++    border: 3px solid #ccc;
++    border-radius: 4px;
++    -moz-border-radius: 4px;
++    -webkit-border-radius: 4px;
++    padding: 5px 30px;
++    text-align: center;
++    margin-top: 0px; } }
++
++.invoiceAmount .invoiceDateCredit {
++  border: 3px solid #ccc;
++  border-radius: 4px;
++  -moz-border-radius: 4px;
++  -webkit-border-radius: 4px;
++  background: #ccc;
++  padding: 5px;
++  float: right;
++  width: 35%; }
++
++.invoiceDateCredit span {
++  display: block;
++  font-weight: bold; }
++
++.invoiceTable {
++  background: #ccc;
++  width: 100%;
++  table-layout: fixed;
++  border-spacing: 1px;
++  th, td {
++    background: #fff;
++    text-align: center;
++    font-size: 13px;
++    color: #333; }
++  th {
++    padding: 7px 2px; }
++  td {
++    padding: 10px 3px; }
++  td.amount {
++    text-align: right; }
++  .serviceTax td {
++    padding-bottom: 50px; }
++  td {
++    .amountinWords {
++      float: left;
++      text-align: left;
++      font-style: italic;
++      width: 65%;
++      padding: 0px 0px 0px 10px;
++      span {
++        color: #767676; } }
++    .total {
++      float: right;
++      font-weight: bold;
++      text-align: center;
++      width: 21%; } }
++  .amountTotal {
++    font-weight: bold;
++    text-align: right; } }
++
++#fancybox-close {
++  background: url("fancy_close.png") no-repeat 0 -33px transparent; }
++
++a#fancybox-close:hover {
++  background-position: 0px 0px; }
++
++.linkedIn {
++  padding-bottom: 40px;
++  a {
++    padding-right: 30px; } }
++
++.signIn {
++  overflow: hidden; }
++
++.linkedinLogo {
++  padding: 7px 0px 0px 20px;
++  float: left; }
++
++.linkedinLogoText {
++  float: left; }
++
++body.sessions {
++  #content .sidebar { width: 300px; }
++  form { padding: 0; }
++  label { display: block; }
++  input[type=submit] { @extend .button-right-arrow; }
++}
++
++body.plans, body.billings {
++  .billing-block {
++    overflow: hidden; // Force new BFC
++    @include opscode-block-base(#FFF, $opscode-colors-heading);
++  }
++}
+diff --git a/app/assets/stylesheets/account.css.scss b/app/assets/stylesheets/account.css.scss
+deleted file mode 100644
+index b3de272..0000000
+--- a/app/assets/stylesheets/account.css.scss
++++ /dev/null
+@@ -1,780 +0,0 @@
+-@import "compass/utilities/general/clearfix";
+-@import "compass/css3/border-radius";
+-
+-h1, h2 {
+-  font-weight: normal; }
+-
+-a img {
+-  border: none;
+-  vertical-align: middle; }
+-
+-/*Menu*/
+-
+-li#homesMenuItem {
+-  a {
+-    background: url("home_icon.png") no-repeat scroll 10px 0px transparent;
+-    display: block;
+-    height: 22px;
+-    width: 18px;
+-    &:hover {
+-      background: url("home_hover_icon.png") no-repeat scroll 10px 0px transparent; } }
+-  &.active a {
+-    background: url("home_hover_icon.png") no-repeat scroll 10px 0px transparent; } }
+-
+-.menu ul li {
+-  &.last, li {
+-    background-image: none; } }
+-
+-#header .menu ul li .submenu {
+-  left:0px; 
+-  *margin-top: -10px; /* IE 7 Hack*/
+-  ul {
+-    position:relative;
+-    z-index:101; } }
+-
+-#header .menu ul li {
+-  ul li.toparrow {
+-    background: url("upMenuArrow.png") no-repeat scroll 12% top transparent;
+-    border: none;
+-    height: 10px;
+-    margin-bottom: -1px;
+-    *margin-bottom: -2px; /* IE 7 Hack*/
+-    position: relative;
+-    width: 150px;
+-    z-index: 100;
+-    &.arrowActive {
+-      background-image: url(upMenuArrow_on.png); }
+-    &:hover {
+-      background: url("upMenuArrow.png") no-repeat scroll 12% top transparent;
+-      border: none;
+-      height: 10px;
+-      margin-bottom: -1px;
+-      *margin-bottom: -2px; /* IE 7 Hack*/
+-      position: relative;
+-      width: 150px;
+-      z-index: 100; } }
+-  &.callout {
+-    a {
+-      padding-left: 11px;
+-      padding-right: 0px; }
+-    background: url("productbgorange.png") no-repeat left top;
+-    height: 43px;
+-    width:120px;
+-    padding-right: 0px; } }
+-
+-/*Sub Naviggation*/
+-
+-#subnav {
+-  height: auto;
+-  background: none;
+-  position: static;
+-  border: none; }
+-
+-#pageTitle {
+-  background-color: #D7D4C3;
+-  height: 70px;
+-  padding: 20px 0 0 40px; }
+-
+-#productMenu {
+-  margin-bottom: 10px;
+-  ul {
+-    overflow: hidden;
+-    list-style: none;
+-    padding: 0px 0px 0px 20px; }
+-  li {
+-    float: left;
+-    padding: 0px 20px 0;
+-    font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif;
+-    a {
+-      color: #85918C;
+-      display: block;
+-      padding: 20px 0px 0;
+-      &.activePageMenuItem {
+-        background: url(pageMenuItem_on.png) no-repeat top center;
+-        color: #333; } } } }
+-
+-/*Account Management*/
+-
+-.key-step {
+-  color: #333;
+-  font-weight: bold; }
+-
+-.organizationHead{
+- @include clearfix; }
+-
+-// #content {
+-//   .button:hover, .button-left-arrow:hover, .button-right-arrow, .big-button, .disabled {
+-//     color: #fff; }
+-//   p {
+-//     margin: 0px;
+-//     padding: 0 0 12px; }
+-//   h1 {
+-//     font-size: 26px; }
+-//   h3 {
+-//     font-weight: normal;
+-//     font-size: 13px; } }
+-
+-/*left content*/
+-
+-/*form*/
+-
+-// form.standard {
+-//   padding: 15px 0px;
+-//   label {
+-//     display: block;
+-//     font: 16px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif;
+-//     margin-bottom: 2px; }
+-//   input[type=submit], input[type=button] {
+-//     @extend .button-right-arrow; }
+-//   fieldset {
+-//     input {
+-//       width: 276px; }
+-//     padding-top: 5px;
+-//     padding-bottom: 12px;
+-//     display: block; }
+-//   input {
+-//     &.changepswd {
+-//       margin: 12px 0 10px; }
+-//     &[type="button"] {
+-//       cursor: pointer; } } }
+-
+-/*fieldset*/
+-
+-/*change password input button*/
+-
+-h1.resetkey {
+-  padding: 15px 0 10px; }
+-
+-#content {
+-  @include clearfix;
+-  .sidebar {
+-    .greyroundedcorner.block a {
+-      font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif;
+-      padding: 5px 25px 6px 1px; }
+-    .greyroundedcorner.block {
+-      background: none;
+-      border-radius: 0px;
+-      border: none;
+-      margin: 0;
+-      padding: 0 0 8px; } } }
+-
+-/*Rounded corner with grey background*/
+-
+-.greyroundedcorner {
+-  padding: 0 0 8px;
+-  .topleft {
+-    background: url("greybgtopcenter.jpg") repeat-x left top transparent; }
+-  .topcenter {
+-    background: url("greybgtopleft.jpg") no-repeat left top transparent; }
+-  .topright {
+-    background: url("gerybgtopright.jpg") no-repeat right top transparent;
+-    height: 11px; }
+-  .centerbg {
+-    background: none repeat scroll 0 0 #D7D4C3;
+-    min-height: 100px; }
+-  .centerinner {
+-    padding: 0 13px;
+-    overflow: hidden; }
+-  .bottomleft {
+-    background: url("greybgbottomcenter.jpg") repeat-x left top transparent; }
+-  .bottomcenter {
+-    background: url("greybgbottomleft.jpg") no-repeat left top transparent; }
+-  .bottomright {
+-    background: url("gerybgbottomright.jpg") no-repeat right top transparent; } }
+-
+-.sidebar {
+-  h2 {
+-    color: #333;
+-    font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif;
+-    font-size: 23px;
+-    margin: 0;
+-    padding: 0 0 10px; }
+-  a.big-button {
+-    margin: 0 0 12px;
+-    font-size: 116%;
+-    background: #f7681a url(littlearrow_white.png) no-repeat right center;
+-    background: url(littlearrow_white.png) no-repeat right center, -moz-linear-gradient(top, #ff8b4d, #f7681a);
+-    background: url(littlearrow_white.png) no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#ff8b4d), to(#f7681a));
+-    &:hover {
+-      background: #333333 url(littlearrow_white.png) no-repeat right center;
+-      background: url(littlearrow_white.png) no-repeat right center, -moz-linear-gradient(top, #737373, #333333);
+-      background: url(littlearrow_white.png) no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#737373), to(#333333)); } } }
+-
+-/*Right side bar button with arrow icon*/
+-
+-/*my profile*/
+-
+-#content form.standard .mailInfo p {
+-  color: #333;
+-  font: 16px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif;
+-  padding: 0px 0px 3px 0px;
+-  margin: 0px; }
+-
+-form.standard {
+-  .mailInfo p input {
+-    margin: 0px 7px 0px 0px;
+-    position: static; }
+-  .myprofiletable {
+-    table-layout: fixed;
+-    fieldset {
+-      width: 100%; }
+-    input {
+-      width: 87%;
+-      padding: 8px;
+-      &.emailaddress {
+-        width: 93%; } }
+-    select {
+-      border: 1px solid #9A9787;
+-      border-radius: 5px 5px 5px 5px;
+-      padding: 8px;
+-      width: 94%; } } }
+-
+-/*Information which appears on the top of the main content with yellow background*/
+-
+-.information {
+-  background: #ffffcc;
+-  padding: 8px;
+-  border: 1px solid #ccc;
+-  margin: 10px 30px 20px;
+-  p.msgicon {
+-    color: #6e6e4e;
+-    background: url(msgicon.png) no-repeat 10px top;
+-    padding: 0px 0px 0px 50px;
+-    font-size: 12px;
+-    height: 25px;
+-    line-height: 25px; } }
+-
+-.profileinformation {
+-  @include clearfix;
+-  .profileimage {
+-    float: left;
+-    width: 20%; }
+-  .profilemsg {
+-    float: left;
+-    padding: 0 0 12px;
+-    width: 80%;
+-    h1 {
+-      font-size: 25px;
+-      margin: 0px; }
+-    p {
+-      font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif; }
+-    span {
+-      display: block;
+-      font-size: 13px;
+-      color: #767676;
+-      padding: 0 0 1px;
+-      &.key-step {
+-        font-weight: normal;
+-        color: #000; } }
+-    p {
+-      color: #333; } } }
+-
+-.border {
+-  height: 1px;
+-  background: #eae9e9;
+-  margin: 15px 0 20px; }
+-
+-form.standard .profileInfo {
+-  overflow: hidden;
+-  padding: 0 0 10px;
+-  fieldset {
+-    float: left;
+-    width: 33%;
+-    margin: 0px;
+-    padding: 0px 0px 12px 0px;
+-    &.lastFieldset {
+-      margin-right: 0px; } }
+-  input {
+-    width: 87%;
+-    padding: 8px; }
+-  &.emailaddress {
+-    width: 70%;
+-    fieldset {
+-      width: 100%; } }
+-  select {
+-    border: 1px solid #9A9787;
+-    border-radius: 5px 5px 5px 5px;
+-    padding: 8px;
+-    width: 94%; } }
+-
+-/*Rounded corner with White background*/
+-
+-.whiteroundedcorner {
+-  padding: 0 0 8px;
+-  .topleft {
+-    background: url("whitebgtopcenter.png") repeat-x left top transparent; }
+-  .topcenter {
+-    background: url("whitebgtopbg.png") no-repeat left top transparent; }
+-  .topright {
+-    background: url("whitebgtopright.png") no-repeat right top transparent;
+-    height: 11px; }
+-  .centerbg {
+-    background: url("whitebgcenterleft.png") repeat-y left top;
+-    padding-left: 3px; }
+-  .centercenter {
+-    background: #fff; }
+-  .centerright {
+-    background: url("whitebgcenterright.png") repeat-y right top;
+-    min-height: 100px; }
+-  .bottomleft {
+-    background: url("whitebgbottomcenter.png") repeat-x left top transparent; }
+-  .bottomcenter {
+-    background: url("whitebgbottomleft.png") no-repeat left top transparent; }
+-  .bottomright {
+-    background: url("whitebgbottomright.png") no-repeat right top transparent; } }
+-
+-h2.accounthead {
+-  margin: 0px;
+-  padding: 0 0 0 40px; }
+-
+-/*Billing History*/
+-
+-.billinghistorytable {
+-  margin: 20px 0px 0px 0px;
+-  table {
+-    width: 94%;
+-    border-collapse: collapse;
+-    margin: 0 auto; }
+-  td, th {
+-    font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif;
+-    text-align: center; }
+-  td {
+-    padding: 4px 0px; }
+-  th {
+-    border-bottom: 1px solid #ccc;
+-    padding: 7px 0px;
+-    font-weight: normal;
+-    font-size: 15px; }
+-  tr.pending-status td, th {
+-    color: #000; }
+-  td.amount {
+-    text-align: right; } }
+-
+-.amount {
+-  text-align: right; }
+-
+-/*Billing Information*/
+-
+-.billingInfo {
+-  @include clearfix;
+-  padding: 10px 20px;
+-  a {
+-    padding: 8px 20px;
+-    margin: 0px 20px 0px 0px; }
+-  .currentInvoice {
+-    float: left;
+-    width: 40%; }
+-  .contactInfo {
+-    float: left;
+-    width: 52%;
+-    border-left: 1px solid #ccc;
+-    margin: 0px 0px 0px 20px;
+-    padding: 0px 0px 0px 20px; }
+-  span {
+-    color: #767676;
+-    display: block;
+-    font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif;
+-    font-size: 14px; }
+-  .contactInfo div {
+-    text-align: right;
+-    a {
+-      position: relative;
+-      bottom: 10px;
+-      margin: 0px; } }
+-  span.key-step {
+-    font-weight: normal;
+-    color: #000; }
+-  h1 {
+-    font-size: 24px;
+-    padding: 0 0 12px; }
+-  h4 {
+-    padding: 0 0 4px;
+-    font: 18px 'SquareSerifMedium',Arial,Helvetica,sans-serif; }
+-  .centerright {
+-    padding: 10px 0px 10px 0px; } }
+-
+-#content .currentInvoice p {
+-  padding-top: 40px; }
+-
+-.callus {
+-  min-height: 635px;
+-  text-align: center; }
+-
+-#content .callus p {
+-  font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif;
+-  font-size: 21px;
+-  padding: 240px 20px 40px; }
+-
+-/*View/Edit Plan*/
+-
+-.viewEditHead {
+-  float: left;
+-  h2.accounthead{
+-    padding-top: 10px; }
+-  h3{
+-    color: #767676;
+-    font-size: 20px;
+-    font-weight: normal;
+-    padding: 5px 0px 0px 40px;
+-    margin: 0px;
+-    span {
+-      margin:0px 10px 0px 0px;  } } }
+-
+-.organizationHead select {
+-  border: 1px solid #9A9787;
+-  border-radius: 5px 5px 5px 5px;
+-  -moz-border-radius: 5px;
+-  -webkit-border-radius: 5px;
+-  float: left;
+-  margin: 15px 0px 0px 20px;
+-  padding: 8px;
+-  width: 150px; }
+-
+-.viewEditPlan {
+-  padding: 0px 20px;
+-  .currentPlanholder {
+-    @include clearfix; }
+-  h2 {
+-    padding-top: 0px;
+-    margin-bottom: 0px; }
+-  h4, p, span, a {
+-    font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif; }
+-  .currentPlanPre {
+-    border-left: medium none;
+-    float:left;
+-    padding-right:20px; }
+-  .currentPlanNode {
+-    padding-left: 20px;
+-    padding-right: 20px;
+-    float: left;
+-    border-left: 1px solid #ccc;
+-    p span {
+-      padding-right: 10px; } }
+-  div p {
+-    padding: 0px; }
+-  .clear {
+-    clear: both;
+-    float: none; }
+-  p {
+-    padding: 10px 0px 0px;
+-    float: left; }
+-  .currentPlanStatus {
+-    @include clearfix; }
+-  .cancelbtn {
+-    float: right;
+-    text-align: right;
+-    border: none;
+-    padding: 9px 9px 13px 0;
+-    .button {
+-      margin: 0px;
+-      cursor: pointer;
+-      padding: 4px 20px 4px 10px; } } }
+-
+-/*View/Edit Plan and Pricing*/
+-
+-#nonAdmin {
+-  padding: 0 20px;
+-}
+-
+-#plansPricing {
+-  padding: 0 20px;
+-  h2 {
+-    color: #333333;
+-    font: 30px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif;
+-    margin: 0px 0px 12px 0px;
+-    padding-top: 10px; }
+-  table, > div {
+-    border-top: 1px solid #CFCFCF; }
+-  table {
+-    border-collapse: collapse;
+-    border-spacing: 0;
+-    td, th {
+-      border-left: 1px solid #CFCFCF;
+-      font-size: 15px;
+-      overflow: hidden;
+-      padding: 8px 13px;
+-      text-align: center;
+-      vertical-align: middle; }
+-    td:first-child, th:first-child {
+-      border-left: none;
+-      font-size: 13px;
+-      font-style: italic;
+-      font-weight: normal;
+-      text-align: right; }
+-    tr.heading th {
+-      font: 25px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif; } }
+-  td {
+-    border-right: none;
+-    &.unavailable {
+-      color: #CCCCCC; } }
+-  th.unavailable {
+-    color: #CCCCCC; }
+-  table tr {
+-    &.fees .spannedRow {
+-      font: 100% / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif; }
+-    &.buy-now {
+-      td, th {
+-        border-color: #CFCFCF;
+-        border-style: solid none none;
+-        border-width: 1px 0 0;
+-        padding: 15px; } } }
+-  a {
+-    &.button {
+-      padding: 4px 22px 4px 10px; }
+-    &.disabled {
+-      padding: 4px 22px 4px 10px;
+-      cursor: auto; } }
+-  .enterprise p {
+-    font-style: italic; } }
+-
+-/*Cancel Subscription*/
+-
+-#popup {
+-  width: 710px;
+-  background: #fff;
+-  min-height: 300px;
+-  padding: 20px; }
+-
+-#facebox .content {
+-  padding: 0px; }
+-
+-#popup {
+-  h1 {
+-    margin: 0px; }
+-  h2 {
+-    font-size: 20px;
+-    margin: 0 0 5px;
+-    span {
+-      color: #9E0E0E;
+-      margin-left: 2px; } }
+-  th, td {
+-    border-bottom: 1px solid #ccc;
+-    padding: 5px 5px;
+-    text-align: center;
+-    font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif; }
+-  table {
+-    border-collapse: collapse;
+-    width: 100%;
+-    margin: 10px 0 0; }
+-  th {
+-    font-weight: normal;
+-    color: #000; }
+-  ul {
+-    background: #FFC5D1;
+-    border: 1px solid #EB9DAD;
+-    color: #333333;
+-    font-size: 12px;
+-    font-style: italic;
+-    padding: 15px 0 20px 31px;
+-    margin: 10px 0 15px;
+-    li {
+-      list-style: lower-alpha;
+-      padding: 0 0 5px; } }
+-  p {
+-    text-align: center;
+-    padding: 30px 0px 15px 0px;
+-    a {
+-      padding: 6px 25px; } }
+-  form.standard {
+-    padding: 0px; }
+-  textarea {
+-    border: 1px solid #ccc;
+-    padding: 2px;
+-    width: 98%;
+-    overflow:auto;
+-    height: 70px; } }
+-
+-/*Sucess and Error Message*/
+-
+-#flash {
+-  font-weight: bold;
+-  margin: auto auto 15px;
+-  padding: 9px 15px;
+-  text-align: center;
+-  width:400px;
+-  &.notice {
+-    background:#FFCC00;
+-    border: 1px solid #F0A200;
+-    color: #000; } }
+-
+-/*Success Message*/
+-
+-form.standard .formError {
+-  font-family: 'SquareSerifMedium',Arial,Helvetica,sans-serif; }
+-
+-#flash.error {
+-  background-color: #990000;
+-  border: 1px solid #000;
+-  color: #ff0000; }
+-
+-/*invoice popup*/
+-
+-#invoicePopup {
+-  background: #fff;
+-  font-size: 13px;
+-  width: 720px;
+-  padding: 30px;
+-  overflow: hidden;
+-  span {
+-    font-family: Helvetica, Arial, sans-serif; }
+-  .invoiceHead {
+-    border-bottom: 1px solid #CCCCCC;
+-    @include clearfix;
+-    padding: 0 0 5px; } }
+-
+-.invoiceHead {
+-  h2 {
+-    float: left;
+-    width: 40%;
+-    padding: 0;
+-    margin: 0px;
+-    font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif; }
+-  .invoiceStatus {
+-    float: left;
+-    width: 33%;
+-    h2 {
+-      width: 100%;
+-      text-align: center; } }
+-  .invoiceButton {
+-    text-align: right;
+-    float: right;
+-    padding: 12px 11px 10px 3px;
+-    width: 23%;
+-    a {
+-      margin: 0px 0px 0px 8px;
+-      padding: 5px 15px;
+-      color:#fff; } } }
+-
+-.invoiceInformation {
+-  border-bottom: 1px solid #ccc;
+-  @include clearfix;
+-  padding: 10px 0px 5px 0px;
+-  p {
+-    padding: 0px;
+-    font-size: 13px; }
+-  b {
+-    color: #333; }
+-  .companyLogo {
+-    float: left;
+-    width: 21%; }
+-  .companyAddress {
+-    float: left;
+-    width: 54%; }
+-  .invoiceAddress {
+-    float: left;
+-    width: 25%;
+-    span { 
+-      display: block;
+-      word-wrap: break-word; } } }
+-
+-.invoiceAmount {
+-  padding: 25px 0px;
+-  @include clearfix;
+-  .invoiceTotalAmount {
+-    float: left;
+-    width: 40%; } }
+-
+-.grandTotal {
+-  @include clearfix; }
+-
+-.invoiceTotalAmount span {
+-  display: block;
+-  font-weight: bold;
+-  font-size: 20px;
+-  float: left;
+-  margin: 10px 10px 0px 0px;
+-  &.amount {
+-    background: #ccc;
+-    font-size: 24px;
+-    border: 3px solid #ccc;
+-    border-radius: 4px;
+-    -moz-border-radius: 4px;
+-    -webkit-border-radius: 4px;
+-    padding: 5px 30px;
+-    text-align: center;
+-    margin-top: 0px; } }
+-
+-.invoiceAmount .invoiceDateCredit {
+-  border: 3px solid #ccc;
+-  border-radius: 4px;
+-  -moz-border-radius: 4px;
+-  -webkit-border-radius: 4px;
+-  background: #ccc;
+-  padding: 5px;
+-  float: right;
+-  width: 35%; }
+-
+-.invoiceDateCredit span {
+-  display: block;
+-  font-weight: bold; }
+-
+-.invoiceTable {
+-  background: #ccc;
+-  width: 100%;
+-  table-layout: fixed;
+-  border-spacing: 1px;
+-  th, td {
+-    background: #fff;
+-    text-align: center;
+-    font-size: 13px;
+-    color: #333; }
+-  th {
+-    padding: 7px 2px; }
+-  td {
+-    padding: 10px 3px; }
+-  td.amount {
+-    text-align: right; }
+-  .serviceTax td {
+-    padding-bottom: 50px; }
+-  td {
+-    .amountinWords {
+-      float: left;
+-      text-align: left;
+-      font-style: italic;
+-      width: 65%;
+-      padding: 0px 0px 0px 10px;
+-      span {
+-        color: #767676; } }
+-    .total {
+-      float: right;
+-      font-weight: bold;
+-      text-align: center;
+-      width: 21%; } }
+-  .amountTotal {
+-    font-weight: bold;
+-    text-align: right; } }
+-
+-#fancybox-close {
+-  background: url("fancy_close.png") no-repeat 0 -33px transparent; }
+-
+-a#fancybox-close:hover {
+-  background-position: 0px 0px; }
+-
+-.linkedIn {
+-  padding-bottom: 40px;
+-  a {
+-    padding-right: 30px; } }
+-
+-.signIn {
+-  overflow: hidden; }
+-
+-.linkedinLogo {
+-  padding: 7px 0px 0px 20px;
+-  float: left; }
+-
+-.linkedinLogoText {
+-  float: left; }
+-
+-body.sessions {
+-  #content .sidebar { width: 300px; }
+-  form { padding: 0; }
+-  label { display: block; }
+-  input[type=submit] { @extend .button-right-arrow; }
+-}
+-
+-body.plans, body.billings {
+-  .billing-block {
+-    overflow: hidden; // Force new BFC
+-    @include opscode-block-base(#FFF, $opscode-colors-heading);
+-  }
+-}
+
+commit 86c737707d982f593d59b7fb2eaac204993ecbb6
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 22 14:02:18 2011 -0800
+
+    Hijacking .main-content was a silly idea since that also includes the flash and whatnot.
+
+diff --git a/app/assets/stylesheets/account.css.scss b/app/assets/stylesheets/account.css.scss
+index 172bfb0..b3de272 100644
+--- a/app/assets/stylesheets/account.css.scss
++++ b/app/assets/stylesheets/account.css.scss
+@@ -773,7 +773,7 @@ body.sessions {
+ }
+ 
+ body.plans, body.billings {
+-  .main-content {
++  .billing-block {
+     overflow: hidden; // Force new BFC
+     @include opscode-block-base(#FFF, $opscode-colors-heading);
+   }
+diff --git a/app/views/billings/_billing_subscription.html.erb b/app/views/billings/_billing_subscription.html.erb
+index b8af89a..e738ca7 100644
+--- a/app/views/billings/_billing_subscription.html.erb
++++ b/app/views/billings/_billing_subscription.html.erb
+@@ -1,4 +1,6 @@
+-<div class="callus">
+-  <p>You are yet to subscribe to a plan and create an organization.<br/>Please click the button to subscribe.</p>
+-  <a href="<%= MANAGE_OPSCODE_URL %>/organizations" class="button-right-arrow">Subscribe</a>
++<div class="billing-block">
++  <div class="callus">
++    <p>You are yet to subscribe to a plan and create an organization.<br/>Please click the button to subscribe.</p>
++    <a href="<%= MANAGE_OPSCODE_URL %>/organizations" class="button-right-arrow">Subscribe</a>
++  </div>
+ </div>
+
+commit 87e28ecf14ccd841c79ef49607068ea5d6aed958
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 22 13:45:56 2011 -0800
+
+    Payoda confirmed they had no actual plans for the tips block, so nuking it until someone gives me real copy.
+
+diff --git a/app/views/shared/_profile_sidebar.html.erb b/app/views/shared/_profile_sidebar.html.erb
+index 1303fc8..35935f7 100644
+--- a/app/views/shared/_profile_sidebar.html.erb
++++ b/app/views/shared/_profile_sidebar.html.erb
+@@ -14,14 +14,4 @@
+     </p>
+     <a href="//help.opscode.com/" class="next-link">Get Help</a>
+   </div>
+-
+-  <%#<div class="block">
+-    <h3 class="title">Tips</h3>
+-    <p>
+-      Filling in your profile information will help people find you on Twitter search if you've added your location or your real name.
+-    </p>
+-    <p>
+-      Your Twitter profile picture helps instantly identify you to those following you - add tells those who aren't more about you.
+-    </p>
+-  </div>%>
+ </div>
+
+commit 97ce4c8deb8cc9778118426cffac752a37598144
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 22 13:44:57 2011 -0800
+
+    Copy tweak on profile sidebar.
+
+diff --git a/app/views/shared/_profile_sidebar.html.erb b/app/views/shared/_profile_sidebar.html.erb
+index 7f0305a..1303fc8 100644
+--- a/app/views/shared/_profile_sidebar.html.erb
++++ b/app/views/shared/_profile_sidebar.html.erb
+@@ -2,7 +2,7 @@
+   <div class="block">
+     <h3 class="title">Public Profile</h3>
+     <p>
+-      To view your Public profile
++      To view your Opscode community profile.
+     </p>
+     <a href="<%= COMMUNITY_OPSCODE_URL %>/users/<%= current_user_name %>" class="next-link">Click Here</a>
+   </div>
+
+commit 991b57a8690acc23370a4b73b917389af89d59e8
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Thu Dec 22 13:40:12 2011 -0800
+
+    ಠ_ಠ
+
+diff --git a/Gemfile.lock b/Gemfile.lock
+index aae56dd..0da380c 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -28,7 +28,7 @@ GIT
+ 
+ GIT
+   remote: git@github.com:opscode/opscode-chrome.git
+-  revision: 4d6954007dca68c6021e02ccf3331880a9985bf4
++  revision: e8d16e7aa761d4842b351a7ff1dbbeb23a7e2940
+   specs:
+     opscode-chrome (0.1)
+       compass (>= 0.12.alpha.0)
+@@ -104,7 +104,7 @@ GEM
+       coffee-script-source
+       execjs
+     coffee-script-source (1.1.3)
+-    compass (0.12.alpha.2)
++    compass (0.12.alpha.1)
+       chunky_png (~> 1.2)
+       fssm (>= 0.2.7)
+       sass (~> 3.1)
+@@ -122,8 +122,6 @@ GEM
+     diff-lcs (1.1.3)
+     erubis (2.7.0)
+     eventmachine (0.12.10)
+-    exception_notification (2.5.2)
+-      actionmailer (>= 3.0.4)
+     execjs (1.2.9)
+       multi_json (~> 1.0)
+     faraday (0.7.5)
+@@ -161,7 +159,7 @@ GEM
+     mixlib-config (1.1.2)
+     mixlib-log (1.3.0)
+     moneta (0.6.0)
+-    multi_json (1.0.4)
++    multi_json (1.0.3)
+     multipart-post (1.1.4)
+     mysql (2.8.1)
+     mysql2 (0.3.10)
+@@ -241,7 +239,7 @@ GEM
+       railties (~> 3.0)
+       rspec (~> 2.7.0)
+     rubyzip (0.9.4)
+-    sass (3.1.12)
++    sass (3.1.10)
+     sass-rails (3.1.5)
+       actionpack (~> 3.1.0)
+       railties (~> 3.1.0)
+@@ -293,7 +291,6 @@ DEPENDENCIES
+   coffee-rails (~> 3.1.1)
+   compass
+   cucumber-rails
+-  exception_notification
+   haml
+   jquery-rails
+   linkedin
+diff --git a/app/assets/stylesheets/account.css.scss b/app/assets/stylesheets/account.css.scss
+index ad100d1..172bfb0 100644
+--- a/app/assets/stylesheets/account.css.scss
++++ b/app/assets/stylesheets/account.css.scss
+@@ -1,7 +1,5 @@
+ @import "compass/utilities/general/clearfix";
+ @import "compass/css3/border-radius";
+-@import "opscode";
+-
+ 
+ h1, h2 {
+   font-weight: normal; }
+
+commit 03cc459ffe03e7ab47215093994c94b84220dfde
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 17:47:22 2011 -0800
+
+    Comment out the tips block in the profile sidebar.
+    
+    This text was copied verbatim from Twitter and I am not amused.
+
+diff --git a/app/views/shared/_profile_sidebar.html.erb b/app/views/shared/_profile_sidebar.html.erb
+index 6ec0aef..7f0305a 100644
+--- a/app/views/shared/_profile_sidebar.html.erb
++++ b/app/views/shared/_profile_sidebar.html.erb
+@@ -15,7 +15,7 @@
+     <a href="//help.opscode.com/" class="next-link">Get Help</a>
+   </div>
+ 
+-  <div class="block">
++  <%#<div class="block">
+     <h3 class="title">Tips</h3>
+     <p>
+       Filling in your profile information will help people find you on Twitter search if you've added your location or your real name.
+@@ -23,5 +23,5 @@
+     <p>
+       Your Twitter profile picture helps instantly identify you to those following you - add tells those who aren't more about you.
+     </p>
+-  </div>
++  </div>%>
+ </div>
+
+commit cf67bb780e141810c997ac2496e2e2b1d38a6622
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 17:47:01 2011 -0800
+
+    Minor copy-editing on the profile sidebar.
+
+diff --git a/app/views/shared/_profile_sidebar.html.erb b/app/views/shared/_profile_sidebar.html.erb
+index 4b9c2a7..6ec0aef 100644
+--- a/app/views/shared/_profile_sidebar.html.erb
++++ b/app/views/shared/_profile_sidebar.html.erb
+@@ -2,7 +2,7 @@
+   <div class="block">
+     <h3 class="title">Public Profile</h3>
+     <p>
+-      To View your Public profile
++      To view your Public profile
+     </p>
+     <a href="<%= COMMUNITY_OPSCODE_URL %>/users/<%= current_user_name %>" class="next-link">Click Here</a>
+   </div>
+@@ -10,7 +10,7 @@
+   <div class="block">
+     <h3 class="title">Need Help?</h3>
+     <p>
+-      If you have questions, or you're stuck, we're here to help.
++      If you have questions or you're stuck, we're here to help.
+     </p>
+     <a href="//help.opscode.com/" class="next-link">Get Help</a>
+   </div>
+
+commit d62f14157da6a84c8956675316bd322c2f5bc903
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 17:46:26 2011 -0800
+
+    Remove the image-based background.
+
+diff --git a/app/assets/stylesheets/account.css.scss b/app/assets/stylesheets/account.css.scss
+index 12b3104..172bfb0 100644
+--- a/app/assets/stylesheets/account.css.scss
++++ b/app/assets/stylesheets/account.css.scss
+@@ -773,5 +773,8 @@ body.sessions {
+ }
+ 
+ body.plans, body.billings {
+-  .main-content { overflow: hidden; } // Force new BFC
++  .main-content {
++    overflow: hidden; // Force new BFC
++    @include opscode-block-base(#FFF, $opscode-colors-heading);
++  }
+ }
+diff --git a/app/views/billings/_billing_subscription.html.erb b/app/views/billings/_billing_subscription.html.erb
+index 62e9f2e..b8af89a 100644
+--- a/app/views/billings/_billing_subscription.html.erb
++++ b/app/views/billings/_billing_subscription.html.erb
+@@ -1,22 +1,4 @@
+-<div class="whiteroundedcorner">
+-  <div class="topleft">
+-    <div class="topcenter">
+-      <div class="topright">&nbsp;</div>
+-    </div>
+-  </div>
+-  <div class="centerbg">
+-    <div class="centercenter">
+-      <div class="centerright">				
+-        <div class="callus">
+-	  <p>You are yet to subscribe to a plan and create an organization.<br/>Please click the button to subscribe.</p>
+-	  <a href="<%= MANAGE_OPSCODE_URL %>/organizations" class="button-right-arrow">Subscribe</a>
+-	</div>				
+-      </div>
+-    </div>
+-  </div>
+-  <div class="bottomleft">
+-    <div class="bottomcenter">
+-      <div class="bottomright">&nbsp;</div>
+-    </div>
+-  </div>
++<div class="callus">
++  <p>You are yet to subscribe to a plan and create an organization.<br/>Please click the button to subscribe.</p>
++  <a href="<%= MANAGE_OPSCODE_URL %>/organizations" class="button-right-arrow">Subscribe</a>
+ </div>
+
+commit 584e60c105f6b3fe8cb5723895a188b57f1110e1
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:33:26 2011 -0800
+
+    Misc CSS updates.
+
+diff --git a/app/assets/stylesheets/account.css.scss b/app/assets/stylesheets/account.css.scss
+index a939116..12b3104 100644
+--- a/app/assets/stylesheets/account.css.scss
++++ b/app/assets/stylesheets/account.css.scss
+@@ -102,45 +102,41 @@ li#homesMenuItem {
+ .organizationHead{
+  @include clearfix; }
+ 
+-#content {
+-  padding: 30px;
+-  .button:hover, .button-left-arrow:hover, .button-right-arrow, .big-button, .disabled {
+-    color: #fff; }
+-  p {
+-    margin: 0px;
+-    padding: 0 0 12px; }
+-  h1 {
+-    font-size: 26px; }
+-  h3 {
+-    font-weight: normal;
+-    font-size: 13px; }
+-  .main-content {
+-    width: 71%;
+-    float: left; } }
++// #content {
++//   .button:hover, .button-left-arrow:hover, .button-right-arrow, .big-button, .disabled {
++//     color: #fff; }
++//   p {
++//     margin: 0px;
++//     padding: 0 0 12px; }
++//   h1 {
++//     font-size: 26px; }
++//   h3 {
++//     font-weight: normal;
++//     font-size: 13px; } }
+ 
+ /*left content*/
+ 
+ /*form*/
+ 
+-form.standard {
+-  padding: 15px 0px;
+-  label {
+-    display: block;
+-    font: 16px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif;
+-    margin-bottom: 2px; }
+-  input[type=submit], input[type=button] {
+-    @extend .button-right-arrow; }
+-  fieldset {
+-    input {
+-      width: 276px; }
+-    padding-top: 5px;
+-    padding-bottom: 12px;
+-    display: block; }
+-  input {
+-    &.changepswd {
+-      margin: 12px 0 10px; }
+-    &[type="button"] {
+-      cursor: pointer; } } }
++// form.standard {
++//   padding: 15px 0px;
++//   label {
++//     display: block;
++//     font: 16px / 1.4 "SquareSerifMedium", Arial, Helvetica, sans-serif;
++//     margin-bottom: 2px; }
++//   input[type=submit], input[type=button] {
++//     @extend .button-right-arrow; }
++//   fieldset {
++//     input {
++//       width: 276px; }
++//     padding-top: 5px;
++//     padding-bottom: 12px;
++//     display: block; }
++//   input {
++//     &.changepswd {
++//       margin: 12px 0 10px; }
++//     &[type="button"] {
++//       cursor: pointer; } } }
+ 
+ /*fieldset*/
+ 
+@@ -149,24 +145,12 @@ form.standard {
+ h1.resetkey {
+   padding: 15px 0 10px; }
+ 
+-.main-content form.standard {
+-  padding: 0px; }
+-
+ #content {
+   @include clearfix;
+-  form.standard input {
+-    &[type="submit"], &[type="button"] {
+-      cursor: pointer;
+-      padding: 0 22px 0 10px; } }
+   .sidebar {
+     .greyroundedcorner.block a {
+       font-family: 'SquareSerifMedium',Helvetica,Arial,sans-serif;
+       padding: 5px 25px 6px 1px; }
+-    .block p {
+-      margin: 0px;
+-      padding: 0 0 12px;
+-      &.link {
+-        padding: 0 0 5px 0px; } }
+     .greyroundedcorner.block {
+       background: none;
+       border-radius: 0px;
+@@ -780,3 +764,14 @@ a#fancybox-close:hover {
+ 
+ .linkedinLogoText {
+   float: left; }
++
++body.sessions {
++  #content .sidebar { width: 300px; }
++  form { padding: 0; }
++  label { display: block; }
++  input[type=submit] { @extend .button-right-arrow; }
++}
++
++body.plans, body.billings {
++  .main-content { overflow: hidden; } // Force new BFC
++}
+
+commit 8be1f41e4a6233c19000387c51dd19b72bbb57ca
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:33:16 2011 -0800
+
+    Recover password was moved to the sidebar for now.
+    
+    Stephen rightly noted its a subpar UI.
+
+diff --git a/app/views/sessions/new.html.erb b/app/views/sessions/new.html.erb
+index 7b2474c..2cdd540 100644
+--- a/app/views/sessions/new.html.erb
++++ b/app/views/sessions/new.html.erb
+@@ -14,7 +14,6 @@
+   <%= field_set_tag(nil, :class => "password_field") do %>
+     <%= label_tag "Password" %>
+     <%= password_field_tag "password" %>
+-    <span><%= link_to "Recover Password", "#{COMMUNITY_OPSCODE_URL}/password_reset_requests/new" %></span>
+   <% end %>
+   <%= submit_tag "Login", :class => "changepswd" %>
+ <% end %>
+
+commit 3d7fc99574474f973ac71801d613cb0c4d0d7e90
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:32:53 2011 -0800
+
+    Kill more omniauth.
+
+diff --git a/app/views/sessions/new.html.erb b/app/views/sessions/new.html.erb
+index 04f5b2b..7b2474c 100644
+--- a/app/views/sessions/new.html.erb
++++ b/app/views/sessions/new.html.erb
+@@ -4,16 +4,7 @@
+   </div>
+ <% end %>
+ 
+-<div class='signIn'>
+-  <div class='linkedinLogoText'>
+-    <h1 class='form-header'>Signin Using:</h1>
+-  </div>
+-  <div class='linkedinLogo'>
+-    <%= link_to image_tag("linkedinLogo.png", :title => "LinkedIn"), "/auth/linkedin", :class=>"omniauth" %>
+-  </div>
+-</div>
+-<h1 class='form-header'>(or)</h1>
+-<h1 class='form-header'>Opscode Platform Signin</h1>
++<h2>Opscode Platform Signin</h2>
+ 
+ <%= form_tag(account_session_path, :class => "standard")  do %>
+   <%= field_set_tag(nil, :class => "text_field") do %>
+
+commit 541199d95f7e5a4209c3873ea412416b18bca9ad
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:32:33 2011 -0800
+
+    Last login is "x days ago".
+
+diff --git a/app/views/accounts/show.html.erb b/app/views/accounts/show.html.erb
+index 2e48046..feba8ed 100644
+--- a/app/views/accounts/show.html.erb
++++ b/app/views/accounts/show.html.erb
+@@ -13,8 +13,7 @@
+   <div class="profilemsg">
+     <h1><%= @user.display_name if @user.display_name%></h1>
+     <span>Member for: <%=time_ago_in_words(@user.created_at)  %></span>
+-    <span>Last Login: <%=time_ago_in_words(@user.last_login) if @user.last_login.present? %></span>
+-    <span class="key-step">User avatar:</span>
++    <span>Last Login: <%=time_ago_in_words(@user.last_login) if @user.last_login.present? %> ago</span>
+     <p>
+       To add or update your avatar image, please visit <a href="http://gravatar.com" target="_blank">Gravatar</a>.
+     </p>
+
+commit 6441e6a9f86b9032fe7e0e635aa3ae7488073003
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:31:54 2011 -0800
+
+    Update two sidebars.
+
+diff --git a/app/views/shared/_login_sidebar.html.erb b/app/views/shared/_login_sidebar.html.erb
+index 2d7b3ba..abf2e42 100644
+--- a/app/views/shared/_login_sidebar.html.erb
++++ b/app/views/shared/_login_sidebar.html.erb
+@@ -1,33 +1,14 @@
+ <div class="sidebar">
+-  <div class="greyroundedcorner block">
+-    <div class="topleft">
+-      <div class="topcenter">
+-        <div class="topright">
+-          &nbsp;
+-        </div>
+-      </div>
+-    </div>
+-    <div class="centerbg">
+-      <div class="centerinner">
+-        <h2>Don't have a login?</h2>
+-        <p>
+-          Please Sign Up to
+-        </p>
+-        <p class="link">
+-          <%= link_to "Hosted Chef", "/hosted-chef", :class=>"hoverLink" %>
+-        </p>
+-        <p class="link">
+-          <%= link_to "Community Site",COMMUNITY_OPSCODE_URL + "/users/new", :class=>"hoverLink" %>
+-        </p>
+-      </div>
+-    </div>
+-    <div class="bottomleft">
+-      <div class="bottomcenter">
+-        <div class="bottomright">
+-          &nbsp;
+-        </div>
+-      </div>
+-    </div>
++  <div class="block">
++    <h3 class="title">Don't have a login?</h3>
++    <p>
++      <%= link_to "Sign Up", "/hosted-chef", :class=>"next-link" %>
++    </p>
++  </div>
++  <div class="block">
++    <h3 class="title">Don't remember your password?</h3>
++    <p>
++      <%= link_to "Recover Password", "#{COMMUNITY_OPSCODE_URL}/password_reset_requests/new", :class=>"next-link" %>
++    </p>
+   </div>
+ </div>
+-
+diff --git a/app/views/shared/_profile_sidebar.html.erb b/app/views/shared/_profile_sidebar.html.erb
+index 5f42567..4b9c2a7 100644
+--- a/app/views/shared/_profile_sidebar.html.erb
++++ b/app/views/shared/_profile_sidebar.html.erb
+@@ -1,80 +1,27 @@
+ <div class="sidebar">
+-  <div class="greyroundedcorner block">
+-    <div class="topleft">
+-      <div class="topcenter">
+-        <div class="topright">
+-          &nbsp;
+-        </div>
+-      </div>
+-    </div>
+-    <div class="centerbg">
+-      <div class="centerinner">
+-        <h2>Public Profile</h2>
+-        <p>
+-          To View your Public profile
+-        </p>
+-        <a href="<%= COMMUNITY_OPSCODE_URL %>/users/<%= current_user_name %>" class="next-link">Click Here</a>
+-      </div>
+-    </div>
+-    <div class="bottomleft">
+-      <div class="bottomcenter">
+-        <div class="bottomright">
+-          &nbsp;
+-        </div>
+-      </div>
+-    </div>
++  <div class="block">
++    <h3 class="title">Public Profile</h3>
++    <p>
++      To View your Public profile
++    </p>
++    <a href="<%= COMMUNITY_OPSCODE_URL %>/users/<%= current_user_name %>" class="next-link">Click Here</a>
+   </div>
+-  <a href="<%= MANAGE_OPSCODE_URL %>" class="big-button">manage.opscode.com</a>
+-  <div class="greyroundedcorner block">
+-    <div class="topleft">
+-      <div class="topcenter">
+-        <div class="topright">
+-          &nbsp;
+-        </div>
+-      </div>
+-    </div>
+-    <div class="centerbg">
+-      <div class="centerinner">
+-        <h2>Need Help?</h2>
+-        <p>
+-          If you have questions, or you're stuck, we're here to help.
+-        </p>
+-        <a href="http://help.opscode.com/" class="next-link">Get Help</a>
+-      </div>
+-    </div>
+-    <div class="bottomleft">
+-      <div class="bottomcenter">
+-        <div class="bottomright">
+-          &nbsp;
+-        </div>
+-      </div>
+-    </div>
++
++  <div class="block">
++    <h3 class="title">Need Help?</h3>
++    <p>
++      If you have questions, or you're stuck, we're here to help.
++    </p>
++    <a href="//help.opscode.com/" class="next-link">Get Help</a>
+   </div>
+-  <div class="greyroundedcorner block">
+-    <div class="topleft">
+-      <div class="topcenter">
+-        <div class="topright">
+-          &nbsp;
+-        </div>
+-      </div>
+-    </div>
+-    <div class="centerbg">
+-      <div class="centerinner">
+-        <h2>Tips</h2>
+-        <p>
+-          Filling in your profile information will help people find you on Twitter search if you've added your location or your real name.
+-        </p>
+-        <p>
+-          Your Twitter profile picture helps instantly identify you to those following you - add tells those who aren't more about you.
+-        </p>
+-      </div>
+-    </div>
+-    <div class="bottomleft">
+-      <div class="bottomcenter">
+-        <div class="bottomright">
+-          &nbsp;
+-        </div>
+-      </div>
+-    </div>
++
++  <div class="block">
++    <h3 class="title">Tips</h3>
++    <p>
++      Filling in your profile information will help people find you on Twitter search if you've added your location or your real name.
++    </p>
++    <p>
++      Your Twitter profile picture helps instantly identify you to those following you - add tells those who aren't more about you.
++    </p>
+   </div>
+ </div>
+
+commit 483f1e29fe189146e79e886098420e13714f65d4
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:31:33 2011 -0800
+
+    Fix header top.
+
+diff --git a/app/views/shared/_menu_header.html.haml b/app/views/shared/_menu_header.html.haml
+index c183ccd..40f4755 100644
+--- a/app/views/shared/_menu_header.html.haml
++++ b/app/views/shared/_menu_header.html.haml
+@@ -7,11 +7,12 @@
+         = link_to(session[:user], profile_account_url)
+       %li
+         = link_to "Logout", logout_account_url, :method => :get, :confirm => "Are you sure you want to logout?"
+-    - else
+-      %li.facebook
+-        %a#facebookLink{:href => "https://www.facebook.com/pages/Opscode/99334479301"}
+-      %li.twitter
+-        %a#twitterLink{:href => "http://twitter.com/#!/opscode"}
++    %li
++      %a{:href => "//manage.opscode.com/"} Management Console
++    %li.facebook
++      %a#facebookLink{:href => "https://www.facebook.com/pages/Opscode/99334479301"}
++    %li.twitter
++      %a#twitterLink{:href => "http://twitter.com/#!/opscode"}
+ .menu
+   %ul
+     %li#homesMenuItem
+
+commit 01575775bfb57bbae2be133d99d72dcb6ae3678d
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:31:16 2011 -0800
+
+    Handle bad requests.
+
+diff --git a/lib/authentication.rb b/lib/authentication.rb
+index 52865a8..aae830d 100644
+--- a/lib/authentication.rb
++++ b/lib/authentication.rb
+@@ -40,7 +40,7 @@ module Authentication
+     }
+ 
+     valid = begin
+-              opscode_api.post_rest("/verify_password", request_body)              
++              opscode_api.post_rest("verify_password", request_body)
+             rescue Net::HTTPServerException => e
+               if bad_request?(e)
+                 false
+@@ -72,4 +72,9 @@ module Authentication
+     create_helpspot_session(user)
+     redirect_back_or_default(:account, :notice => 'Login successful.') unless @opener_url
+   end
++
++  # Copied verbatim from http_exception_helper.rb in opscode-community-site
++  def bad_request?(exception)
++    exception.kind_of?(Net::HTTPServerException) && exception.message =~ /400/
++  end
+ end
+
+commit 4c201ed757bec7f3cfd3154a8dc0322e6d731f2f
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:31:03 2011 -0800
+
+    Remove github/linkedin icons from profile page.
+
+diff --git a/app/views/accounts/_profile.html.erb b/app/views/accounts/_profile.html.erb
+index a445523..e1087a5 100644
+--- a/app/views/accounts/_profile.html.erb
++++ b/app/views/accounts/_profile.html.erb
+@@ -80,13 +80,7 @@
+       <%= f.radio_button :email_daily_digest, true %>in a single daily digest
+     </p>
+   </div>
+-  
+-  <div class="border"></div>
+-  <h3>Link my profile</h3>
+-  <div class='linkedIn'> 
+-    <%= link_to_linkedin %>
+-    <%= link_to_github %>
+-  </div>
++
+   <%= f.submit "Save Changes" %>
+  
+ <% end %>
+
+commit 53925915a3fc2e22158b1287b4c0b8c0abc97851
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:22:58 2011 -0800
+
+    Add real favicon.
+
+diff --git a/app/views/layouts/application.html.erb b/app/views/layouts/application.html.erb
+index f911afe..48854bc 100644
+--- a/app/views/layouts/application.html.erb
++++ b/app/views/layouts/application.html.erb
+@@ -9,6 +9,8 @@
+     <%= javascript_tag do %>
+       $.RAILS_ENV = "<%= Rails.env %>";
+     <% end %>
++    <link rel="icon" href="/favicon.png" type="image/png" />
++    <link rel="shortcut icon" href="/favicon.ico" />
+   </head>
+   <body id="acctmgmt" class="<%= body_class %>">
+     <div id="container">
+diff --git a/public/favicon.ico b/public/favicon.ico
+index e69de29..5083f49 100644
+Binary files a/public/favicon.ico and b/public/favicon.ico differ
+diff --git a/public/favicon.png b/public/favicon.png
+new file mode 100644
+index 0000000..8b86f54
+Binary files /dev/null and b/public/favicon.png differ
+
+commit 26f2dd19f44e976e7cca174e58a3181328ce9e4e
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Wed Dec 21 16:22:44 2011 -0800
+
+    Add view info to body tag for use in CSS.
+
+diff --git a/app/controllers/application_controller.rb b/app/controllers/application_controller.rb
+index 0dcec93..37da72e 100644
+--- a/app/controllers/application_controller.rb
++++ b/app/controllers/application_controller.rb
+@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
+     end
+   end
+ 
+-  helper_method :logged_in?, :current_user, :current_user_name, :opscode_api, :opscode_user_api, :statement_total_amount, :statement_plan_name, :is_billing_admin?
++  helper_method :logged_in?, :current_user, :current_user_name, :opscode_api, :opscode_user_api, :statement_total_amount, :statement_plan_name, :is_billing_admin?, :body_class
+ 
+   def handle_500(exception)
+     logger.error("#{exception.class.name} #{exception.message}\n" + exception.backtrace.join("\n"))
+@@ -89,4 +89,8 @@ class ApplicationController < ActionController::Base
+     render :template => 'shared/404', :status => 404
+   end
+ 
++  def body_class
++    "#{controller_name} #{action_name}"
++  end
++
+ end
+diff --git a/app/views/layouts/application.html.erb b/app/views/layouts/application.html.erb
+index 17a843b..f911afe 100644
+--- a/app/views/layouts/application.html.erb
++++ b/app/views/layouts/application.html.erb
+@@ -10,7 +10,7 @@
+       $.RAILS_ENV = "<%= Rails.env %>";
+     <% end %>
+   </head>
+-  <body>
++  <body id="acctmgmt" class="<%= body_class %>">
+     <div id="container">
+       <div id="header">
+         <%= render "shared/menu_header" %>
+
+commit 13356432bd58ebfc8ac1fdcb580f6ee53d6c7a4a
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Tue Dec 20 14:19:19 2011 -0800
+
+    Add a development database.yml.
+
+diff --git a/config/database.yml b/config/database.yml
+new file mode 100644
+index 0000000..93f5b91
+--- /dev/null
++++ b/config/database.yml
+@@ -0,0 +1,22 @@
++login: &login
++  adapter: mysql
++  username: root
++  password:
++  socket: /tmp/mysql.sock
++
++development:
++  database: opscode_community_development
++  <<: *login
++
++test:
++  database: opscode_community_test
++  <<: *login
++
++production:
++  database: opscode_community_production
++  <<: *login
++
++cucumber:
++  database: opscode_community_test
++  <<: *login
++
+
+commit 63bb581ed40795fd23b8c1b9ad8aa6f41d8ff1d4
+Author: Noah Kantrowitz <noah@coderanger.net>
+Date:   Tue Dec 20 14:19:09 2011 -0800
+
+    Add thin to the gemfile for PIAB
+
+diff --git a/Gemfile b/Gemfile
+index 2a17fb6..bd4f60b 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -27,4 +27,5 @@ group :development, :test do
+   gem 'rspec-rails'
+   gem 'cucumber-rails'
+   gem 'capybara'
++  gem 'thin'
+ end
+diff --git a/Gemfile.lock b/Gemfile.lock
+index c355c1f..81f9669 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -118,8 +118,10 @@ GEM
+       capybara (>= 1.1.1)
+       cucumber (>= 1.1.1)
+       nokogiri (>= 1.5.0)
++    daemons (1.1.5)
+     diff-lcs (1.1.3)
+     erubis (2.7.0)
++    eventmachine (0.12.10)
+     execjs (1.2.9)
+       multi_json (~> 1.0)
+     faraday (0.7.5)
+@@ -252,6 +254,10 @@ GEM
+       tilt (~> 1.1, != 1.3.0)
+     systemu (2.2.0)
+     term-ansicolor (1.0.7)
++    thin (1.3.1)
++      daemons (>= 1.0.9)
++      eventmachine (>= 0.12.6)
++      rack (>= 1.0.0)
+     thor (0.14.6)
+     tilt (1.3.3)
+     treetop (1.4.10)
+@@ -290,5 +296,6 @@ DEPENDENCIES
+   rails (= 3.1.1)
+   rspec-rails
+   sass-rails (~> 3.1.4)
++  thin
+   uglifier (>= 1.0.3)
+   wicked_pdf

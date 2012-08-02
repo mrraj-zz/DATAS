@@ -1,0 +1,10 @@
+(0) [0x00000000000fe05b] f000:e05b (unk. ctxt): xor ax, ax                ; 31c0
+(0) [0x00000000000fe05d] f000:e05d (unk. ctxt): out 0x0d, al              ; e60d
+(0) [0x00000000000fe05f] f000:e05f (unk. ctxt): out 0xda, al              ; e6da
+(0) [0x00000000000fe061] f000:e061 (unk. ctxt): mov al, 0xc0              ; b0c0
+(0) [0x00000000000fe063] f000:e063 (unk. ctxt): out 0xd6, al              ; e6d6
+(0) [0x00000000000fe065] f000:e065 (unk. ctxt): mov al, 0x00              ; b000
+(0) [0x00000000000fe067] f000:e067 (unk. ctxt): out 0xd4, al              ; e6d4
+(0) [0x00000000000fe069] f000:e069 (unk. ctxt): mov al, 0x0f              ; b00f
+(0) [0x00000000000fe06b] f000:e06b (unk. ctxt): out 0x70, al              ; e670
+(0) [0x00000000000fe06d] f000:e06d (unk. ctxt): in al, 0x71               ; e471

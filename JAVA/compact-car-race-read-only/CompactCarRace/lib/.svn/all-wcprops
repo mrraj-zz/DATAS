@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/82/trunk/CompactCarRace/lib
+END
+vecmath.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/82/trunk/CompactCarRace/lib/vecmath.jar
+END
+jdom.jar
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/62/trunk/CompactCarRace/lib/jdom.jar
+END
+j3dcore.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/82/trunk/CompactCarRace/lib/j3dcore.jar
+END
+ms3dloader.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/62/trunk/CompactCarRace/lib/ms3dloader.jar
+END
+mysqlconnector.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/62/trunk/CompactCarRace/lib/mysqlconnector.jar
+END
+j3dutils.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/82/trunk/CompactCarRace/lib/j3dutils.jar
+END
+milkloader.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/62/trunk/CompactCarRace/lib/milkloader.jar
+END

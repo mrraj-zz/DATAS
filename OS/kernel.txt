@@ -1,0 +1,7 @@
+I have developed a small x86 'Hello World' linux based OS. I just created the files loader.s, linker.ld, main.c and used the grub loader to boot my os using bochs emulator in ubuntu.
+
+I just accessed the video memory and displayed the 'hello world' string to screen. And i debugged my os using boches, the cr0 PM value is set to 1, so i think my os is directly entering to protected mode instead of entering to real mode. 
+
+And my question is how i should enter into real mode directly without entering to protected mode?. After this how i can call bios interrupts(http://en.wikipedia.org/wiki/BIOS_interrupt_call) to get the initial hardware details like HDD, RAM, Processor, etc...
+
+Please anyone help me, great advance thanks to you.

@@ -1,0 +1,17 @@
+http://tigcc.ticalc.org/doc/gnuasm.html#SEC119
+==============================================
+
+syntex : .section name[,"flags"] or .section name[, subsegment]
+
+Flags :
+	b => bss section(uninitialized data)
+	n => section is not loaded
+	w => writable section
+	d = data section
+	r => read only section
+	x => executable section
+	m => mergable section(TIGCC extension, symbols in the section are considered mergeable constants)
+	u => unaligned section
+	s => shared section
+	a => ignored(for compatibility with the ELF version)
+	

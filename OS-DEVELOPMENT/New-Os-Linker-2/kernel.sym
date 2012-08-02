@@ -1,0 +1,7 @@
+0010000c loader
+00100019 hang
+0010001c k_clear_screen
+0010005d kmain
+001000e0 sbss
+001000e0 stack
+001040e0 ebss

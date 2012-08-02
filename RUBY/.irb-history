@@ -1,0 +1,100 @@
+ActiveResource::Schema
+ActiveResource::Schema.class
+ActiveResource::Schema.new
+schema = _
+s = _
+s.class
+s.untanit
+s.untaint
+s.text
+s.time
+s.methods.sort
+s.decimal
+s.attrs
+ActiveResource
+ActiveResource.class
+ActiveResource.constants
+ActiveResource::Base
+ActiveResource.methods.sort
+ls
+class Ac
+include ActiveResource
+p 'HI Mohanraj'
+en
+d
+Ac.class
+class Ac < ActiveResource::Base
+def hi
+p 'Mohanraj'
+Ac
+Ac.new.hi
+class G < ActiveResource
+class G < ActiveResource::Base
+g.new
+G.new
+g= _
+g
+g.present
+?
+g.present?
+g.methods..sort
+g.methods..\sort
+"".present?
+" ".present?
+nil.present?
+3.present?
+g.site
+g.get
+g.get('values')
+g.methods.sort.grep /po/
+g.methods.sort.grep /ge/
+g.methods.sort.grep /pu/
+g.methods.sort.grep /del/
+g.attributes
+g._format?
+g._format
+g.connection
+g.methods.sort
+g.create
+Post
+Gets
+Get.column_names
+Get.create(:name => 'Mohanraj', :address => 'Chennai', :qualification => 'B.tech', :working_place => 'Chennai', :account_number => 1111133)
+Get
+Get.all
+g = _
+g.class
+Get.first
+a= 'mohanraj'
+a.titleixe
+a.titleize
+a
+a.class
+    require 'benchmark'
+    puts Benchmark.measure { "a"*1_000_000 }
+Struct.new
+Struct.new(:name)
+Name = Struct.new(:name)
+Name.class
+Name.new
+n|| = 'Mohan'
+n ||= 'Mohan'
+n
+Struct.new('Linkedin', :name)
+Linkedin
+Struct::Linkedin
+Struct::Linkedin.new
+def ji
+<<-EOF
+p 'mohanraj'
+p 'ramanujam'
+EOF
+end
+ji
+l = lambda{|v| v}
+l
+p = Proc.new{|b| b}
+p
+p.call(3)
+l()4
+l(5)

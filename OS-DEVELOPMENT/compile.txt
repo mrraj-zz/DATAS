@@ -1,0 +1,4 @@
+ 1333  gcc -o kernel.o -c kernel.c -Wall -Wextra -Werror -nostdlib -fno-builtin -nostartfiles -nodefaultlibs
+ 1334  gcc -o kernel.o -c kernel.c -Wall -Wextra -nostdlib -fno-builtin -nostartfiles -nodefaultlibs
+ 1335  ld -T linker.ld -o kernel.bin loader.o kernel.o
+ 1336  qemu -kernel kernel.bin 

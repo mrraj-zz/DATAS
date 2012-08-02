@@ -1,0 +1,746 @@
+Running X session wrapper
+Loading profile from /etc/profile
+Loading profile from /home/mohanraj/.profile
+Loading resource: /etc/X11/Xresources/x11-common
+Loading X session script /etc/X11/Xsession.d/20x11-common_process-args
+Loading X session script /etc/X11/Xsession.d/30x11-common_xresources
+Loading X session script /etc/X11/Xsession.d/40x11-common_xsessionrc
+Loading X session script /etc/X11/Xsession.d/50_check_unity_support
+Loading X session script /etc/X11/Xsession.d/50x11-common_determine-startup
+Loading X session script /etc/X11/Xsession.d/52libcanberra-gtk3-module_add-to-gtk-modules
+Loading X session script /etc/X11/Xsession.d/52libcanberra-gtk-module_add-to-gtk-modules
+Loading X session script /etc/X11/Xsession.d/55gnome-session_gnomerc
+Loading X session script /etc/X11/Xsession.d/60x11-common_localhost
+Loading X session script /etc/X11/Xsession.d/60x11-common_xdg_path
+Loading X session script /etc/X11/Xsession.d/60xdg-user-dirs-update
+Loading X session script /etc/X11/Xsession.d/65compiz_profile-on-session
+Loading X session script /etc/X11/Xsession.d/70gconfd_path-on-session
+Loading X session script /etc/X11/Xsession.d/75dbus_dbus-launch
+Loading X session script /etc/X11/Xsession.d/80appmenu
+Loading X session script /etc/X11/Xsession.d/80appmenu-gtk3
+Loading X session script /etc/X11/Xsession.d/80im-switch
+Setting IM through im-switch for locale=en_US.
+Start IM through /etc/X11/xinit/xinput.d/all_ALL linked to /etc/X11/xinit/xinput.d/default.
+Loading X session script /etc/X11/Xsession.d/90consolekit
+Loading X session script /etc/X11/Xsession.d/90qt-a11y
+Loading X session script /etc/X11/Xsession.d/90x11-common_ssh-agent
+Loading X session script /etc/X11/Xsession.d/99x11-common_start
+GNOME_KEYRING_CONTROL=/tmp/keyring-CqlO6J
+GPG_AGENT_INFO=/tmp/keyring-CqlO6J/gpg:0:1
+GNOME_KEYRING_CONTROL=/tmp/keyring-CqlO6J
+GPG_AGENT_INFO=/tmp/keyring-CqlO6J/gpg:0:1
+GNOME_KEYRING_CONTROL=/tmp/keyring-CqlO6J
+GPG_AGENT_INFO=/tmp/keyring-CqlO6J/gpg:0:1
+SSH_AUTH_SOCK=/tmp/keyring-CqlO6J/ssh
+GNOME_KEYRING_CONTROL=/tmp/keyring-CqlO6J
+GPG_AGENT_INFO=/tmp/keyring-CqlO6J/gpg:0:1
+SSH_AUTH_SOCK=/tmp/keyring-CqlO6J/ssh
+Checking if settings need to be migrated ...no
+Checking if internal files need to be migrated ...no
+Backend     : gconf
+Integration : true
+Profile     : unity
+Adding plugins
+Skipping upgrade com.canonical.unity.unity.01.upgrade
+Skipping upgrade com.canonical.unity.unity.02.upgrade
+Initializing core options...done
+(bluetooth-applet:1951): Bluetooth-DEBUG: adding killswitch idx 1 state KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: adding killswitch idx 3 state KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 1 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 3 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitches state KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 1 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 3 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitches state KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 1 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 3 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitches state KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 1 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 3 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitches state KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 1 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitch 3 is KILLSWITCH_STATE_UNBLOCKED
+(bluetooth-applet:1951): Bluetooth-DEBUG: killswitches state KILLSWITCH_STATE_UNBLOCKED
+** (gnome-fallback-mount-helper:2090): DEBUG: Starting automounting manager
+Initializing bailer options...done
+Initializing detection options...done
+Initializing composite options...done
+** Message: applet now removed from the notification area
+** (nm-applet:1979): DEBUG: old state indicates that this was not a disconnect 0
+** Message: using fallback from indicator to GtkStatusIcon
+Initializing opengl options...done
+Initializing decor options...done
+Initializing nautilus-gdu extension
+Initializing vpswitch options...done
+** (nautilus:2066): DEBUG: Syncdaemon not running, waiting for it to start in NameOwnerChanged
+Initializing grid options...done
+Initializing mousepoll options...done
+Initializing snap options...done
+Initializing move options...done
+Initializing animation options...done
+Initializing place options...done
+Initializing resize options...done
+compiz (expo) - Warn: failed to bind image to texture
+Initializing expo options...done
+Initializing unitymtgrabhandles options...done
+Initializing gnomecompat options...done
+I/O warning : failed to load external entity "/home/mohanraj/.compiz/session/1011a61a6159e94bc2132625546139680500000016220035"
+Initializing session options...done
+Initializing wall options...done
+Initializing workarounds options...done
+Initializing fade options...done
+Initializing ezoom options...done
+Initializing scale options...done
+** (gnome-fallback-mount-helper:2090): DEBUG: Found ConsoleKit session at path /org/freedesktop/ConsoleKit/Session2
+** (gnome-fallback-mount-helper:2090): DEBUG: ScreenSaver name appeared
+** (gnome-fallback-mount-helper:2090): DEBUG: ScreenSaver proxy ready
+** (gnome-fallback-mount-helper:2090): DEBUG: ConsoleKit session is active 1
+** (gnome-fallback-mount-helper:2090): DEBUG: Screensaver GetActive() returned 0
+** (process:2121): DEBUG: Telepathy Indicator started
+
+Screen geometry changed:
+   0x0x1366x768
+
+unity-panel-service: no process found
+Initializing unityshell options...done
+Nautilus-Share-Message: Called "net usershare info" but it failed: 'net usershare' returned error 255: net usershare: cannot open usershare directory /var/lib/samba/usershares. Error No such file or directory
+Please ask your system administrator to enable user sharing.
+
+Starting unity-window-decorator
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/blueman/plugins/BasePlugin.py", line 65, in _load
+    self.on_load(parent)
+  File "/usr/lib/python2.7/dist-packages/blueman/plugins/applet/PulseAudio.py", line 173, in on_load
+    raise Exception("PulseAudio too old, required 0.9.15 or higher")
+Exception: PulseAudio too old, required 0.9.15 or higher
+DEBUG 2012-01-11 09:47:57 glib <unknown>:0 Setting to primary screen rect: x=0 y=0 w=1366 h=768
+** Message: moving back from GtkStatusIcon to indicator
+Setting Update "main_menu_key"
+Setting Update "run_key"
+WARN  2012-01-11 09:48:06 unity.glib.dbusproxy GLibDBusProxy.cpp:255 Cannot call method InfoRequest proxy /com/canonical/unity/lens/files does not exist
+WARN  2012-01-11 09:48:06 unity.glib.dbusproxy GLibDBusProxy.cpp:255 Cannot call method SetActive proxy /com/canonical/unity/lens/files does not exist
+WARN  2012-01-11 09:48:06 unity.glib.dbusproxy GLibDBusProxy.cpp:255 Cannot call method InfoRequest proxy /com/canonical/unity/lens/music does not exist
+WARN  2012-01-11 09:48:06 unity.glib.dbusproxy GLibDBusProxy.cpp:255 Cannot call method SetActive proxy /com/canonical/unity/lens/music does not exist
+WARN  2012-01-11 09:48:08 unity.glib.dbusproxy GLibDBusProxy.cpp:255 Cannot call method InfoRequest proxy /com/canonical/unity/lens/applications does not exist
+WARN  2012-01-11 09:48:08 unity.glib.dbusproxy GLibDBusProxy.cpp:255 Cannot call method SetActive proxy /com/canonical/unity/lens/applications does not exist
+WARN  2012-01-11 09:48:08 unity.glib.dbusproxy GLibDBusProxy.cpp:255 Cannot call method InfoRequest proxy /com/canonical/unity/lens/commands does not exist
+WARN  2012-01-11 09:48:08 unity.glib.dbusproxy GLibDBusProxy.cpp:255 Cannot call method SetActive proxy /com/canonical/unity/lens/commands does not exist
+WARN  2012-01-11 09:48:08 unity.iconloader IconLoader.cpp:509 Unable to load contents of file:///usr/share/icons/unity-icon-theme/places/svg/category-installed.svg: Error opening file: No such file or directory
+WARN  2012-01-11 09:48:08 unity.iconloader IconLoader.cpp:509 Unable to load contents of file:///usr/share/icons/unity-icon-theme/places/svg/category-available.svg: Error opening file: No such file or directory
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for blueman-sendto was not found
+** (nautilus:2066): DEBUG: Got notification of SyncDaemon startup in NameOwnerChanged
+WARN  2012-01-11 09:48:41 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+** (deja-dup-monitor:2508): DEBUG: monitor.vala:221: Automatic backups disabled.  Not scheduling a backup.
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+** (process:2265): DEBUG: desktop-launch-listener.vala:118: ran with uri: file:///home/mohanraj/Downloads/Mac_OS_X_Lion_10.7.2_VMware_Image.torrent
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 1 events
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for blueman-sendto was not found
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 1 events
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+** (process:2265): DEBUG: desktop-launch-listener.vala:118: ran with uri: file:///home/mohanraj/Downloads/%5BisoHunt%5D%20Kung.Fu.Panda%5B2008%5DDvDrip-aXXo.torrent
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 1 events
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for blueman-sendto was not found
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 3 events
+** (process:2265): DEBUG: desktop-launch-listener.vala:118: ran with uri: file:///home/mohanraj/Downloads/%5BisoHunt%5D%20Kung.Fu.Panda%5B2008%5DDvDrip-aXXo.torrent
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 1 events
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for blueman-sendto was not found
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 1 events
+compiz (core) - Warn: failed to receive ConfigureNotify event on 0x4800004
+
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+** (process:2265): DEBUG: desktop-launch-listener.vala:118: ran with uri: file:///home/mohanraj/Downloads/Oracle_VM_VirtualBox_Extension_Pack-4.1.4-74291.vbox-extpack
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 1 events
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for blueman-sendto was not found
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 1 events
+** (gnome-fallback-mount-helper:2090): DEBUG: Screensaver active changed to 1
+** (gnome-fallback-mount-helper:2090): DEBUG: Screensaver active changed to 0
+WARN  2012-01-11 10:20:06 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+WARN  2012-01-11 10:20:07 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for vmplayer was not found
+
+** (process:2265): WARNING **: recent-manager-provider.vala:125: Desktop file for blueman-sendto was not found
+WARN  2012-01-11 10:20:47 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+WARN  2012-01-11 10:49:59 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+WARN  2012-01-11 10:50:00 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+WARN  2012-01-11 10:50:05 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+WARN  2012-01-11 10:53:50 glib.glib-gobject <unknown>:0 instance of invalid non-instantiatable type `(null)'
+
+(gnome-terminal:3046): Gdk-CRITICAL **: gdk_window_get_toplevel: assertion `GDK_IS_WINDOW (window)' failed
+** (gnome-fallback-mount-helper:2090): DEBUG: Screensaver active changed to 1
+** (gnome-fallback-mount-helper:2090): DEBUG: Screensaver active changed to 0
+** (gnome-fallback-mount-helper:2090): DEBUG: Screensaver active changed to 1
+** (gnome-fallback-mount-helper:2090): DEBUG: Screensaver active changed to 0
+WARN  2012-01-11 16:31:01 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+WARN  2012-01-11 16:31:02 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+WARN  2012-01-11 16:33:31 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+
+(nautilus:2066): GLib-GObject-CRITICAL **: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+WARN  2012-01-11 16:33:41 glib <unknown>:0 Unable to fetch children: Method "Children" with signature "" on interface "org.ayatana.bamf.view" doesn't exist
+
+
+WARN  2012-01-11 16:33:41 glib.glib-gobject <unknown>:0 instance of invalid non-instantiatable type `(null)'
+WARN  2012-01-11 16:36:27 glib.glib-gobject <unknown>:0 instance of invalid non-instantiatable type `(null)'
+WARN  2012-01-11 16:38:05 glib.glib-gobject <unknown>:0 instance with invalid (NULL) class pointer
+** (process:2265): DEBUG: desktop-launch-listener.vala:118: ran with uri: file:///tmp/Windows.7.x64.VMware.Image.torrent
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 1 events
+compiz (core) - Warn: failed to receive ConfigureNotify event on 0x4c00004
+
+WARN  2012-01-11 16:38:36 glib.glib-gobject <unknown>:0 instance of invalid non-instantiatable type `(null)'
+** (process:2265): DEBUG: desktop-launch-listener.vala:118: ran with uri: file:///tmp/Windows.7.x64.VMware.Image.torrent
+** (process:2265): DEBUG: zeitgeist-datahub.vala:174: Inserting 1 events
+WARN  2012-01-11 16:39:50 glib.glib-gobject <unknown>:0 instance of invalid non-instantiatable type `<invalid>'
